@@ -21,34 +21,20 @@
             overflow-x: hidden;
         }
 
-        /* ----- 1. PRELOADER (Video Jaisa) STYLES ----- */
+        /* ----- 1. PRELOADER (Pehle jaisa) ----- */
         #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0f0f0f;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0f0f0f; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
             transition: opacity 0.5s ease-out;
         }
         .preloader-content {
-            opacity: 0;
-            animation: fadeIn 1s ease-out 0.3s forwards;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            opacity: 0; animation: fadeIn 1s ease-out 0.3s forwards;
+            display: flex; flex-direction: column; align-items: center;
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
         .preloader-star svg {
-            width: 80px;
-            height: 80px;
-            fill: #ffffff;
+            width: 80px; height: 80px; fill: #ffffff;
             animation: pulse 1.5s infinite ease-in-out;
         }
         @keyframes pulse {
@@ -75,39 +61,43 @@
         @keyframes dot-bounce {
             0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); }
         }
+        #main-content { opacity: 0; transition: opacity 0.5s ease-in; }
 
-        /* Website content (shuru mein chhupa hua) */
-        #main-content {
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-
-        /* ----- 2. HEADER STYLES (Transparent on top) ----- */
+        /* ----- 2. HEADER STYLES (Logo aur Links Updated) ----- */
         header {
-            background: transparent; /* Shuru mein transparent */
+            background: transparent;
             border-bottom: 1px solid rgba(51, 51, 51, 0.5);
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            transition: background-color 0.3s ease; /* Scroll par color badlega */
+            transition: background-color 0.3s ease;
         }
-        header.scrolled {
-            background-color: #1a1a1a;
-        }
+        header.scrolled { background-color: #1a1a1a; }
         .container {
             width: 90%; max-width: 1100px; margin: auto;
             overflow: hidden; padding: 0 20px;
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        header #logo { font-size: 24px; font-weight: bold; color: #fff; text-decoration: none; }
-        header nav { display: flex; gap: 20px; }
-        header nav a { color: #ccc; text-decoration: none; font-size: 16px; transition: color 0.3s; }
+        /* Logo (STAR) */
+        header #logo {
+            font-size: 28px; /* Star ka size */
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            line-height: 1;
+        }
+        /* Nav Links */
+        header nav { display: flex; gap: 25px; } /* Thoda zyada gap */
+        header nav a {
+            color: #ccc; text-decoration: none;
+            font-size: 16px; transition: color 0.3s;
+        }
         header nav a:hover { color: var(--purple-glow); }
 
 
-        /* ----- 3. NEW HERO SECTION (Image jaisa) ----- */
+        /* ----- 3. NEW HERO SECTION (Background Animation ke saath) ----- */
         #hero {
             padding-top: 150px;
             padding-bottom: 100px;
@@ -116,109 +106,123 @@
             position: relative;
             overflow: hidden;
         }
-        /* Purple background glow */
         #hero::before {
-            content: '';
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--purple-glow) 0%, transparent 60%);
+            filter: blur(80px); opacity: 0.6; z-index: 1;
+        }
+        
+        /* NEW: Instagram Style Background Animation */
+        .background-svg-animation {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--purple-glow) 0%, transparent 60%);
-            filter: blur(80px);
-            opacity: 0.6;
-            z-index: 1;
+            z-index: 0;
+            opacity: 0.15; /* Halka light */
+            width: 300px;
+            height: 300px;
         }
-        /* Content ko glow ke upar rakhne ke liye */
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .draw-path {
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 4;
+            /* Animation properties */
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 4s linear infinite;
         }
-        .hero-star svg {
-            width: 80px;
-            height: 80px;
+        .draw-path-dot {
             fill: #ffffff;
-            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInOut 4s linear infinite;
         }
-        #hero h1 { /* YUSUF */
-            font-size: 4rem;
-            margin: 0;
-            letter-spacing: 4px;
+        /* Animation: Drawing */
+        @keyframes draw {
+            0% { stroke-dashoffset: 1000; }
+            80% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 0; }
         }
-        #hero h2 { /* #1 Instagram... */
-            font-size: 2rem;
-            margin-top: 20px;
-            color: #fff;
-            font-weight: 500;
+        /* Animation: Dot Fade */
+        @keyframes fadeInOut {
+            0%, 50% { opacity: 0; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
         }
-        #hero p.sub-heading { /* PROFESSIONAL... */
-            font-size: 1.2rem;
-            color: #aaa;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 30px;
+        /* --- End Background Animation --- */
+
+        .hero-content { position: relative; z-index: 2; }
+        .hero-star svg {
+            width: 80px; height: 80px;
+            fill: #ffffff; margin-bottom: 10px;
         }
-        #hero p.services-list { /* Instagram Unban... */
-            font-size: 1.1rem;
-            color: #ccc;
+        #hero h1 { font-size: 4rem; margin: 0; letter-spacing: 4px; }
+        #hero h2 {
+            font-size: 2rem; margin-top: 20px;
+            color: #fff; font-weight: 500;
+        }
+        #hero p.sub-heading {
+            font-size: 1.2rem; color: #aaa; letter-spacing: 1px;
+            text-transform: uppercase; margin-top: 30px;
+        }
+        #hero p.services-list {
+            font-size: 1.1rem; color: #ccc;
             margin-top: 15px;
         }
         .hero-buttons {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            margin-top: 40px; display: flex; flex-direction: column;
+            align-items: center; gap: 15px;
         }
-        /* Glass-style buttons */
         .hero-button {
-            display: inline-block;
-            color: #fff;
-            padding: 12px 30px;
-            font-size: 18px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            width: 250px;
+            display: inline-block; color: #fff; padding: 12px 30px;
+            font-size: 18px; text-decoration: none; border-radius: 25px;
+            font-weight: bold; width: 250px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            transition: background 0.3s;
+            backdrop-filter: blur(10px); transition: background 0.3s;
         }
-        .hero-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .hero-button:hover { background: rgba(255, 255, 255, 0.2); }
 
         /* ----- 4. SCROLL-TO-REVEAL STYLES ----- */
         .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
+            opacity: 0; transform: translateY(50px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .reveal-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        
+        /* ----- 5. SERVICES, REVIEWS, CONTACT ----- */
+        #services, #reviews, #contact { padding: 80px 0; text-align: center; }
+        #services, #reviews { background: #1a1a1a; }
+        
+        #services h2, #reviews h2, #contact h2 {
+            font-size: 2.5rem; margin-bottom: 50px;
         }
-        .service-box:nth-child(2) { transition-delay: 0.1s; }
-        .service-box:nth-child(3) { transition-delay: 0.2s; }
-
-        /* ----- 5. SERVICES & CONTACT (Pehle jaisa) ----- */
-        #services { padding: 80px 0; background: #1a1a1a; text-align: center; }
-        #services h2 { font-size: 2.5rem; margin-bottom: 50px; }
-        .services-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-        .service-box {
+        
+        .services-container, .reviews-container {
+            display: flex; justify-content: center;
+            gap: 30px; flex-wrap: wrap;
+        }
+        .service-box, .review-box {
             background: #222; border: 1px solid #333; padding: 30px;
             border-radius: 8px; width: 300px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
         }
-        .service-box:hover { transform: translateY(-10px); }
-        .service-box h3 { font-size: 1.5rem; color: #00aaff; margin-bottom: 15px; }
+        .service-box:hover, .review-box:hover { transform: translateY(-10px); }
+        .service-box h3, .review-box h3 {
+            font-size: 1.5rem; color: #00aaff;
+            margin-bottom: 15px;
+        }
+        /* Alag styles for review box */
+        .review-box p.testimonial { font-style: italic; color: #ccc; }
+        .review-box p.client-name {
+            font-weight: bold; color: #fff;
+            margin-top: 15px;
+        }
+        
         .service-box p { color: #ccc; }
 
-        #contact { padding: 80px 0; text-align: center; }
-        #contact h2 { font-size: 2.5rem; margin-bottom: 20px; }
         #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
         .cta-button {
             display: inline-block; background: #007bff; color: #fff;
@@ -227,64 +231,38 @@
         }
         .cta-button:hover { background: #0056b3; }
 
-        footer { background: #1a1a1a; color: #777; text-align: center; padding: 20px 0; border-top: 1px solid #333; }
+        footer {
+            background: #1a1a1a; color: #777;
+            text-align: center; padding: 20px 0;
+            border-top: 1px solid #333;
+        }
         
-        /* ----- 6. NEW TOS BUTTON & PARCHI ----- */
+        /* ----- 6. TOS BUTTON & PARCHI (Pehle jaisa) ----- */
         #tos-container {
-            position: fixed;
-            bottom: 40px; /* Thoda upar */
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
+            position: fixed; bottom: 40px; right: 20px;
+            z-index: 1000; display: flex; align-items: center;
         }
-
-        /* "Parchi" jo shuru mein chhupi hai */
         #tos-parchi {
-            background: #222;
-            border: 1px solid var(--yellow-sparkle);
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
+            background: #222; border: 1px solid var(--yellow-sparkle);
+            padding: 10px 15px; border-radius: 5px; text-decoration: none;
+            color: white; font-weight: bold; font-size: 14px;
             margin-right: 10px;
-            /* Yellow sparkle shadow */
             box-shadow: 0 0 15px var(--yellow-sparkle);
-            
-            /* Animation ke liye */
-            opacity: 0;
-            transform: translateX(20px);
-            visibility: hidden;
-            transition: all 0.3s ease;
+            opacity: 0; transform: translateX(20px);
+            visibility: hidden; transition: all 0.3s ease;
         }
-
-        /* Jab "visible" class lagegi tab dikhegi */
         #tos-parchi.visible {
-            opacity: 1;
-            transform: translateX(0);
+            opacity: 1; transform: translateX(0);
             visibility: visible;
         }
-
-        /* Shield Button */
         #tos-shield-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%; /* Gol button */
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            line-height: 50px; /* Icon ko center mein laane ke liye */
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            background-color: #007bff; color: white; border: none;
+            border-radius: 50%; width: 50px; height: 50px;
+            font-size: 24px; line-height: 50px; text-align: center;
+            cursor: pointer; transition: background-color 0.3s;
             z-index: 1001;
         }
-        #tos-shield-btn:hover {
-            background-color: #0056b3;
-        }
+        #tos-shield-btn:hover { background-color: #0056b3; }
 
     </style>
 </head>
@@ -313,31 +291,35 @@
 
         <header>
             <div class="container">
-                <a href="#hero" id="logo">MySite</a>
+                <a href="#hero" id="logo">⭐</a>
                 <nav>
-                    <a href="#hero">Home</a>
                     <a href="#services">Services</a>
+                    <a href="#reviews">Reviews</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </div>
         </header>
 
         <section id="hero">
+            
+            <div class="background-svg-animation">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path class="draw-path" d="M30 10 H70 C81 10 90 19 90 30 V70 C90 81 81 90 70 90 H30 C19 90 10 81 10 70 V30 C10 19 19 10 30 10 Z" />
+                    <path class="draw-path" d="M50 35 C41.7 35 35 41.7 35 50 C35 58.3 41.7 65 50 65 C58.3 65 65 58.3 65 50 C65 41.7 58.3 35 50 35 Z" />
+                    <circle class="draw-path-dot" cx="70" cy="30" r="4" />
+                </svg>
+            </div>
+
             <div class="hero-content">
                 <div class="hero-star">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
                     </svg>
                 </div>
-                
                 <h1>YUSUF</h1>
-                
                 <h2>#1 Instagram &amp; Facebook Account Services</h2>
-                
                 <p class="sub-heading">PROFESSIONAL ACCOUNT RECOVERY &amp; UNBAN SERVICES</p>
-                
                 <p class="services-list">Instagram Unban • Facebook Recovery • Account Security</p>
-                
                 <div class="hero-buttons">
                     <a href="#services" class="hero-button">View Services</a>
                     <a href="#contact" class="hero-button">Contact Now</a>
@@ -353,13 +335,36 @@
                         <h3>Service One</h3>
                         <p>Description of the first service. Explain what you offer and why it's valuable.</p>
                     </div>
-                    <div class="service-box reveal-on-scroll">
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.1s;">
                         <h3>Service Two</h3>
                         <p>Description of the second service. Keep it clear and concise for your visitors.</p>
                     </div>
-                    <div class="service-box reveal-on-scroll">
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.2s;">
                         <h3>Service Three</h3>
                         <p>Description of the third service. This layout is perfect for three main features.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div class="container">
+                <h2 class="reveal-on-scroll">Reviews</h2>
+                <div class="reviews-container">
+                    <div class="review-box reveal-on-scroll">
+                        <h3>Amazing Service!</h3>
+                        <p class="testimonial">"Incredible work, got my account back faster than I thought possible. Highly recommend."</p>
+                        <p class="client-name">- Client A</p>
+                    </div>
+                    <div class="review-box reveal-on-scroll" style="transition-delay: 0.1s;">
+                        <h3>Life Saver</h3>
+                        <p class="testimonial">"I thought my business page was gone forever. Yusuf is a true professional and a life saver."</p>
+                        <p class="client-name">- Client B</p>
+                    </div>
+                    <div class="review-box reveal-on-scroll" style="transition-delay: 0.2s;">
+                        <h3>100% Legit</h3>
+                        <p class="testimonial">"Fast communication and got the job done. Don't waste time with others."</p>
+                        <p class="client-name">- Client C</p>
                     </div>
                 </div>
             </div>
@@ -385,7 +390,6 @@
         <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank" id="tos-parchi">
             Terms Of Service
         </a>
-        
         <button id="tos-shield-btn">🛡️</button>
     </div>
 
@@ -396,19 +400,13 @@
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             const mainContent = document.getElementById('main-content');
-            
-            // 3.5 seconds tak preloader dikhayega
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 mainContent.style.transition = 'opacity 0.5s ease-in 0.3s';
                 mainContent.style.opacity = '1';
-                
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 500); 
+                setTimeout(() => { preloader.style.display = 'none'; }, 500); 
             }, 3500); // 3.5 seconds
         });
-
 
         // --- HEADER SCROLL EFFECT SCRIPT ---
         const header = document.querySelector('header');
@@ -420,14 +418,9 @@
             }
         });
 
-
         // --- SCROLL-TO-REVEAL SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1 
-            };
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observerCallback = (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -438,31 +431,29 @@
             };
             const observer = new IntersectionObserver(observerCallback, observerOptions);
             const revealElements = document.querySelectorAll('.reveal-on-scroll');
-            revealElements.forEach(el => {
-                observer.observe(el);
-            });
+            revealElements.forEach(el => { observer.observe(el); });
         });
 
-
-        // --- NEW TOS PARCHI SCRIPT ---
+        // --- TOS PARCHI SCRIPT ---
         const tosShieldBtn = document.getElementById('tos-shield-btn');
         const tosParchi = document.getElementById('tos-parchi');
-
         tosShieldBtn.addEventListener('click', () => {
-            // "visible" class ko lagata/hatata hai
             tosParchi.classList.toggle('visible');
         });
 
-
         // --- SMOOTH SCROLL SCRIPT ---
-        document.querySelectorAll('header nav a, .hero-button[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('header nav a, .hero-button[href^="#"], a#logo[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    const headerOffset = 80; 
+                    let headerOffset = 80;
+                    // Agar hero par ja rahe hain (star logo se), toh offset kam rakho
+                    if (targetId === '#hero') {
+                        headerOffset = 0;
+                    }
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
