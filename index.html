@@ -435,7 +435,7 @@
             /* Removed border and shadow */
         }
         
-        /* --- CHANGE 1: Review aur Service heading ko common kiya --- */
+        /* Review aur Service heading ko common kiya */
         .headline-border-box h2 {
             font-size: 2.2rem; /* UPDATED: Font size thoda chhota */
             margin-bottom: 0;
@@ -580,17 +580,13 @@
         /* ----- End Services ----- */
 
 
-        #reviews, #contact { 
+        /* --- REVIEWS SECTION --- */
+        #reviews { 
             padding: 80px 0; 
             text-align: center; 
             position: relative; 
             overflow: hidden; 
-        }
-        #reviews { background: #1a1a1a; }
-        
-        /* --- CHANGE 2: Sirf #contact h2 rakha --- */
-        #contact h2 {
-            font-size: 2.5rem; margin-bottom: 50px;
+            background: #1a1a1a; 
         }
         
         .reviews-container {
@@ -598,7 +594,7 @@
             gap: 30px; flex-wrap: wrap;
         }
         
-        /* --- CHANGE 3: Review box ko service box jaisa style diya --- */
+        /* Review box ko service box jaisa style diya */
         .review-box {
             background: var(--service-box-bg); /* #222 */
             border: 1px solid var(--service-box-border); /* Dark Yellow Border */
@@ -611,7 +607,7 @@
         }
         .review-box:hover { transform: translateY(-10px); }
         
-        /* --- CHANGE 4: Review box ka title yellow kiya --- */
+        /* Review box ka title yellow kiya */
         .review-box h3 {
             font-size: 1.5rem; color: var(--service-title-color); /* Yellow title */
             margin-bottom: 15px;
@@ -622,24 +618,132 @@
             margin-top: 15px;
         }
 
-        #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
-        .cta-button {
-            display: inline-block; background: var(--brand-glow); color: #0f0f0f;
-            padding: 12px 25px; font-size: 18px; text-decoration: none;
-            border-radius: 5px; font-weight: bold; transition: background 0.3s, color 0.3s;
-        }
-        .cta-button:hover {
-            background: #d4b100;
-            color: #000;
-        }
-
-        footer {
-            background: #1a1a1a; color: #777;
-            text-align: center; padding: 20px 0;
-            border-top: 1px solid #333;
+        
+        /* ----- 7. NEW FOOTER (CONTACT) SECTION ----- */
+        footer#contact {
+            background: #1a1a1a;
+            padding: 80px 0 40px 0; /* 80px top, 40px bottom */
+            color: #ccc;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
         }
         
-        /* ----- 6. TOS BUTTON & PARCHI ----- */
+        /* Glow effect for footer */
+        footer#contact::before {
+            content: ''; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            width: 800px; 
+            height: 800px;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
+            filter: blur(100px); 
+            opacity: 0.3; /* Subtle glow */
+            z-index: 0; /* Behind container */
+        }
+        
+        footer#contact .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .footer-header svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--yellow-sparkle);
+        }
+        .footer-header h2 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+        
+        footer#contact .footer-description {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 450px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .footer-socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .footer-socials a svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+            transition: fill 0.3s ease;
+        }
+        .footer-socials a:hover {
+            background: var(--yellow-sparkle);
+        }
+        .footer-socials a:hover svg {
+            fill: #000000;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        footer#contact h3 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        footer#contact h4 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin: 20px 0 5px 0;
+            font-weight: bold;
+        }
+        footer#contact p {
+            margin: 0;
+            color: #ccc;
+            font-size: 1rem;
+        }
+        .footer-footnote {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 25px;
+            font-style: italic;
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+
+        /* ----- TOS BUTTON & PARCHI ----- */
         #tos-container {
             position: fixed; bottom: 40px; right: 20px;
             z-index: 1000; display: flex; align-items: center;
@@ -670,7 +774,7 @@
         /* ----- 7. NEW: GLOBAL GLOW ----- */
         
         /* Glow effect for sections */
-        #about::before, #services::before, #reviews::before, #contact::before {
+        #about::before, #services::before, #reviews::before {
             content: ''; 
             position: absolute; 
             top: 50%; 
@@ -685,7 +789,7 @@
         }
         
         /* Ensure containers are on top of the section glow */
-        #services .container, #reviews .container, #contact .container, footer .container {
+        #services .container, #reviews .container {
             position: relative;
             z-index: 1;
         }
@@ -710,7 +814,9 @@
             .about-stats {
                 grid-template-columns: 1fr 1fr; 
             }
-            .review-box { width: 90%; }
+            
+            /* --- BADLAAV YAHAN HAI: Review box chhota kiya --- */
+            .review-box { width: 85%; } /* 90% se 85% kiya */
             
             /* Service box width on mobile */
             .service-box {
@@ -728,10 +834,29 @@
             .headline-border-box {
                 padding: 1px 10px;
             }
-            /* --- CHANGE 5: Common mobile heading size --- */
             .headline-border-box h2 {
                 font-size: 1.8rem; /* Mobile pe thoda chhota */
             }
+            
+            /* New Footer Responsive */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            footer#contact {
+                text-align: center;
+            }
+            .footer-header {
+                justify-content: center;
+            }
+            .footer-socials {
+                justify-content: center;
+            }
+            footer#contact .footer-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
             
             /* * --- UPDATE 2: "SHORTER" FIX --- 
              * Mobile par box ki height kam karne ke liye 
@@ -1100,19 +1225,63 @@
             </div>
         </section>
 
-        <section id="contact">
+        <footer id="contact">
             <div class="container">
-                <h2 class="reveal-on-scroll">Ready to Get Started?</h2>
-                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">Reach out for professional and rapid response.</p>
-                <a href="https://t.me/reurge" class="cta-button reveal-on-scroll" style="transition-delay: 0.2s;" target="_blank">
-                    Contact on Telegram: @reurge
-                </a>
-            </div>
-        </section>
+                <div class="footer-header reveal-on-scroll">
+                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M512 198.5l-186.7-32.3L256 0 186.7 166.2 0 198.5l133.3 145.1L99.2 512 256 422.2 412.8 512l-34.1-168.4L512 198.5z"/>
+                    </svg>
+                    <h2>EᴠᴇxʏɪN</h2>
+                </div>
 
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 Evexyn. All rights reserved.</p>
+                <p class="footer-description reveal-on-scroll">
+                    Your trusted partner for social media recovery and premium account management.
+                </p>
+
+                <div class="footer-socials reveal-on-scroll">
+                    <a href="https://t.me/reurge" target="_blank" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 11.9c-.88-.27-.88-1.37.2-1.64l15.97-6.1c.7-.27 1.22.17 1.02.95l-2.7 12.91c-.2 1.02-1.01 1.27-1.73.79l-4.83-3.58l-2.32 2.23c-.25.26-.47.47-.87.47z"/></svg>
+                    </a>
+                    <a href="#" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.227-1.668 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85C2.44 3.93 3.96 2.44 7.15 2.233c1.266-.058 1.646-.07 4.85-.07zM12 0C8.74 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.74 24 12 24s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98C23.986 15.667 24 15.26 24 12s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.667.014 15.26 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+                    </a>
+                    <a href="#" target="_blank" aria-label="Discord">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.885-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4463.816-.6963 1.3084a18.04 18.04 0 0 0-5.3217 0 17.26 17.26 0 0 0-.6963-1.3084.0741.0741 0 0 0-.0785-.0371A19.7913 19.7913 0 0 0 3.683 4.3698a.0741.0741 0 0 0-.0371.0785c-.0371.211-.0371.422-.0371.633a19.7913 19.7913 0 0 0 6.0318 13.6365.0741.0741 0 0 0 .0962.0371c.422-.2482.844-.5335 1.229-.8558a.0741.0741 0 0 0 .0371-.0962c-.1358-.211-.2482-.422-.3753-.633a.0741.0741 0 0 1 .0371-.0962c.9622-.4963 1.848-1.068 2.6575-1.7153a.0741.0741 0 0 1 .0962 0c.8096.6473 1.6953 1.219 2.6575 1.7153a.0741.0741 0 0 1 .0371.0962c-.127.211-.2395.422-.3753.633a.0741.0741 0 0 0 .0371.0962c.385.3223.807.6075 1.229.8558a.0741.0741 0 0 0 .0962-.0371A19.7913 19.7913 0 0 0 24.037 5.0813a.0741.0741 0 0 0-.0371-.0785c0-.211-.0371-.422-.0371-.633a.0741.0741 0 0 0-.0371-.0785zM8.02 15.3312c-.9622 0-1.7516-.844-1.7516-1.8854s.7894-1.8854 1.7516-1.8854c.9622 0 1.7516.844 1.7516 1.8854s-.7894 1.8854-1.7516 1.8854zm7.96 0c-.9622 0-1.7516-.844-1.7516-1.8854s.7894-1.8854 1.7516-1.8854c.9622 0 1.7516.844 1.7516 1.8854s-.7894 1.8854-1.7516 1.8854z"/></svg>
+                    </a>
+                </div>
+
+                <div class="footer-content reveal-on-scroll">
+                    <div class="footer-column">
+                        <h3>Get in touch ➔</h3>
+                        
+                        <h4>Telegram</h4>
+                        <p>@reurge</p>
+                        
+                        <h4>Discord</h4>
+                        <p>_zentex__</p>
+                        
+                        <h4>Email</h4>
+                        <p>contact@zmedia.in</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Operating Hours</h3>
+                        
+                        <h4>Mon-Fri</h4>
+                        <p>9:00 AM - 8:00 PM UTC</p>
+                        
+                        <h4>Sat</h4>
+                        <p>10:00 AM - 6:00 PM UTC</p>
+                        
+                        <h4>Sun</h4>
+                        <p>Closed</p>
+                        
+                        <p class="footer-footnote">* Emergency services 24/7 for premium clients</p>
+                    </div>
+                </div>
+
+                <div class="footer-copyright reveal-on-scroll">
+                    <p>&copy; 2025 Evexyn. All rights reserved.</p>
+                </div>
             </div>
         </footer>
 
@@ -1223,6 +1392,11 @@
                     if (targetId === '#hero') {
                         headerOffset = 0;
                     }
+                    /* NEW: Check if target is footer */
+                    if (targetId === '#contact') {
+                        headerOffset = 0; /* No offset for footer */
+                    }
+                    
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
