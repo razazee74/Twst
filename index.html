@@ -23,20 +23,22 @@
             /* Updated: Yellow dot to match brand */
             --zen-logo-color: var(--yellow-sparkle); 
 
-            /* NEW: Colors for the new service boxes */
-            --service-box-bg: #222; /* Darker purple from image */
-            --service-box-border: #52006A; /* Border color */
-            --service-box-shadow-glow: #8a2be2; /* Blue-violet glow */
-            --service-title-color: #f7d000; /* Yellow */
+            /* NEW: Dark Yellow Colors for Service Boxes */
+            --service-box-bg: #222; 
+            --service-box-border: #806200; /* Dark Yellow */
+            --service-box-shadow-glow: #b38b00; /* Dark Yellow */
+            --service-title-color: #ffd700; /* Bright Yellow */
             --service-text-color: #cccccc;
             --price-color: #ffffff;
-            --list-dot-color: #f7d000; /* Yellow for list dots */
-            --popular-tag-bg: #8a2be2; /* Blue-violet */
-            --popular-tag-text: #ffffff;
-            --get-started-bg: #8a2be2; /* Blue-violet */
-            --get-started-hover-bg: #6a008c; /* Darker purple on hover */
-            --get-started-text: #ffffff;
-            --icon-color: #f7d000; /* Yellow for icons */
+            --list-dot-color: #ffd700; /* Bright Yellow */
+            --popular-tag-bg: #b38b00; /* Dark Yellow */
+            --popular-tag-text: #000000; /* Black Text */
+            --get-started-bg: #b38b00; /* Dark Yellow */
+            --get-started-hover-bg: #806200; /* Darker Yellow on hover */
+            --get-started-text: #000000; /* Black Text */
+            --icon-color: #ffd700; /* Bright Yellow */
+            --headline-bg: #b38b00; /* Dark Yellow for Headline BG */
+            --headline-text: #000000; /* Black Text for Headline */
         }
         
         body {
@@ -409,75 +411,64 @@
             margin: 0 15px;
         }
 
-        /* ----- 6. NEW SERVICES SLIDER STYLES ----- */
+        /* ----- 6. SERVICES - VERTICAL LAYOUT ----- */
         #services { 
-            padding: 80px 0; 
+            padding: 60px 0; /* Reduced top padding */
             text-align: center; 
             background: #1a1a1a;
-            position: relative; /* Added for glow */
-            overflow: hidden; /* Added for glow */
+            position: relative; 
+            overflow: hidden; 
         }
         
-        /* UPDATED: Headline wrapper for services */
         .headline-wrapper {
             text-align: center;
-            margin-bottom: 30px; /* Reduced space below headline */
+            margin-bottom: 30px; 
         }
 
-        /* UPDATED: Headline border box - now with less top padding */
+        /* UPDATED: Headline box with Dark Yellow BG */
         .headline-border-box {
             display: inline-block;
             position: relative;
-            border: 2px solid var(--tos-blue);
-            padding: 5px 25px; /* Reduced vertical padding */
+            background-color: var(--headline-bg); /* Dark Yellow BG */
+            padding: 3px 20px; /* Thinner padding */
             border-radius: 8px;
-            box-shadow: 0 0 10px var(--tos-blue), 0 0 15px var(--tos-blue);
+            /* Removed border and shadow */
         }
         
         #services h2 {
             font-size: 2.5rem; 
             margin-bottom: 0;
             white-space: nowrap;
+            color: var(--headline-text); /* Black text */
         }
         
-        .slider-container {
-            width: auto;
-            overflow: hidden;
-            margin: 0 15px; 
-            cursor: grab;
-        }
-        .slider-container:active {
-            cursor: grabbing;
-        }
-
-        .services-slider {
+        /* Container for vertical boxes */
+        .services-vertical-container {
             display: flex;
-            gap: 20px; 
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-        .services-slider::-webkit-scrollbar {
-            display: none;
+            flex-direction: column;
+            align-items: center; /* Center boxes */
+            gap: 30px; /* Space between boxes */
+            padding: 0 15px; /* Side spacing */
         }
 
-        /* NEW SERVICE BOX STYLING - BASED ON IMAGE 2 */
+        /* NEW SERVICE BOX STYLING - BASED ON IMAGE 2 (Dark Yellow Theme) */
         .service-box {
             background: var(--service-box-bg); 
             border: 1px solid var(--service-box-border); 
             padding: 30px;
-            border-radius: 15px; /* Rounded corners like image */
-            width: 320px; /* Adjusted width to match image proportions */
-            min-height: 480px; /* Significantly taller as requested */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 30px var(--service-box-shadow-glow); /* Glow effect */
+            border-radius: 15px; 
+            width: 100%; /* Full width within container */
+            max-width: 600px; /* Max width to prevent stretching too wide */
+            min-height: auto; /* Height will adapt to content */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 20px var(--service-box-shadow-glow); /* Adjusted glow */
             transition: transform 0.3s, box-shadow 0.3s;
-            flex-shrink: 0;
-            position: relative; /* For the "MOST POPULAR" tag */
-            text-align: left; /* Text alignment from image */
+            position: relative; 
+            text-align: left; 
+            box-sizing: border-box; /* Include padding in width */
         }
         .service-box:hover { 
-            transform: translateY(-10px) scale(1.02); 
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4), 0 0 40px var(--service-box-shadow-glow);
+            transform: translateY(-5px) scale(1.01); 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 30px var(--service-box-shadow-glow);
         }
 
         /* Icons at the top of service box */
@@ -493,18 +484,18 @@
             margin-right: 10px;
         }
         .service-box .icon-group .lock-icon {
-            width: 20px; /* Slightly smaller lock icon */
+            width: 20px; 
             height: 20px;
-            margin-left: 5px; /* Space between text and lock */
+            margin-left: 5px; 
         }
 
 
         .service-box h3 {
-            font-size: 1.8rem; /* Larger title */
+            font-size: 1.8rem; 
             color: var(--service-title-color);
             margin-top: 0;
             margin-bottom: 10px;
-            line-height: 1.2; /* Better line spacing for title */
+            line-height: 1.2; 
         }
         .service-box p { 
             color: var(--service-text-color); 
@@ -513,10 +504,10 @@
         }
         
         .service-box .price {
-            font-size: 2.2rem; /* Big price text */
+            font-size: 2.2rem; 
             font-weight: bold;
             color: var(--price-color);
-            margin: 25px 0 20px; /* More space around price */
+            margin: 25px 0 20px; 
         }
 
         .service-box ul {
@@ -532,7 +523,7 @@
             font-size: 0.95rem;
         }
         .service-box ul li::before {
-            content: '•'; /* Custom bullet point */
+            content: '•'; 
             color: var(--list-dot-color);
             font-size: 1.5em;
             position: absolute;
@@ -543,16 +534,19 @@
 
         .service-box .get-started-button {
             display: block;
-            width: calc(100% - 20px); /* Adjust for padding in button */
+            width: 100%; /* Full width of parent */
             margin: 0 auto;
-            padding: 15px 20px;
+            padding: 15px 10px; /* Adjusted padding */
             background: var(--get-started-bg);
             color: var(--get-started-text);
             text-decoration: none;
             border-radius: 10px;
-            font-size: 1.1rem;
+            font-size: 1.4rem; /* Larger font size */
             font-weight: bold;
+            text-align: center; /* Ensure text is centered */
             transition: background 0.3s ease;
+            box-sizing: border-box; /* Include padding in width */
+            text-transform: uppercase; /* Make text uppercase */
         }
         .service-box .get-started-button:hover {
             background: var(--get-started-hover-bg);
@@ -568,19 +562,19 @@
             font-size: 0.8rem;
             font-weight: bold;
             padding: 5px 15px;
-            border-top-right-radius: 15px; /* Match box border radius */
+            border-top-right-radius: 15px; 
             border-bottom-left-radius: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        /* ----- End Services Slider ----- */
+        /* ----- End Services ----- */
 
 
         #reviews, #contact { 
             padding: 80px 0; 
             text-align: center; 
-            position: relative; /* Added for glow */
-            overflow: hidden; /* Added for glow */
+            position: relative; 
+            overflow: hidden; 
         }
         #reviews { background: #1a1a1a; }
         
@@ -688,19 +682,18 @@
                 flex-direction: column;
                 gap: 20px;
             }
-            /* Updated: Responsive grid for stats */
             .about-stats {
-                grid-template-columns: 1fr; /* Stack stats on small screens */
+                grid-template-columns: 1fr; 
             }
             .review-box { width: 90%; }
             
             /* Service box width on mobile */
             .service-box {
-                width: 280px; /* Slightly smaller for mobile */
-                min-height: 450px; 
+                width: 100%; /* Use full width on mobile */
+                max-width: 90%; /* Limit max width */
+                min-height: auto; /* Allow height to adjust */
             }
 
-            /* Updated: About box ko kone se hataya */
             #about .container { padding: 20px; width: 85%; } 
             
             #about h2 { font-size: 2rem; }
@@ -843,138 +836,141 @@
                     </div>
                 </div>
                 
-                <div class="slider-container">
-                    <div class="services-slider">
-                        <div class="service-box">
-                            <div class="popular-tag">MOST POPULAR</div>
-                            <div class="icon-group">
-                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
-                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
-                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
-                                </svg>
-                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <h3>Instagram Account Recovery</h3>
-                            <p>Expert service to regain access to banned or suspended Instagram accounts with a high success rate.</p>
-                            <div class="price">Starting from xxxx$</div>
-                            <ul>
-                                <li>High success rate</li>
-                                <li>24/7 support</li>
-                                <li>Professional handling</li>
-                                <li>Quick turnaround</li>
-                            </ul>
-                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
+                <div class="services-vertical-container">
+                    
+                    <div class="service-box reveal-on-scroll">
+                        <div class="popular-tag">MOST POPULAR</div>
+                        <div class="icon-group">
+                            <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                            </svg>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                         </div>
+                        <h3>Instagram Account Recovery</h3>
+                        <p>Expert service to regain access to banned or suspended Instagram accounts with a high success rate.</p>
+                        <div class="price">Starting from xxxx$</div>
+                        <ul>
+                            <li>High success rate</li>
+                            <li>24/7 support</li>
+                            <li>Professional handling</li>
+                            <li>Quick turnaround</li>
+                        </ul>
+                        <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
+                    </div>
 
-                        <div class="service-box">
-                            <div class="icon-group">
-                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
-                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
-                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
-                                </svg>
-                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <h3>Facebook Account Recovery</h3>
-                            <p>Recover your disabled or hacked Facebook profile and pages quickly with our specialized methods.</p>
-                            <div class="price">Starting from xxxx$</div>
-                            <ul>
-                                <li>High success rate</li>
-                                <li>24/7 support</li>
-                                <li>Professional handling</li>
-                                <li>Quick turnaround</li>
-                            </ul>
-                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
+                    
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.1s;">
+                        <div class="icon-group">
+                            <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                            </svg>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                         </div>
-                        
-                        <div class="service-box">
-                            <div class="icon-group">
-                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
-                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
-                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
-                                </svg>
-                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <h3>TikTok Account Recovery</h3>
-                            <p>Banned or suspended on TikTok? We provide solutions to get your account back and active.</p>
-                            <div class="price">Starting from xxxx$</div>
-                            <ul>
-                                <li>High success rate</li>
-                                <li>24/7 support</li>
-                                <li>Professional handling</li>
-                                <li>Quick turnaround</li>
-                            </ul>
-                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
+                        <h3>Facebook Account Recovery</h3>
+                        <p>Recover your disabled or hacked Facebook profile and pages quickly with our specialized methods.</p>
+                        <div class="price">Starting from xxxx$</div>
+                        <ul>
+                            <li>High success rate</li>
+                            <li>24/7 support</li>
+                            <li>Professional handling</li>
+                            <li>Quick turnaround</li>
+                        </ul>
+                        <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
+                    </div>
+                    
+                    
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.2s;">
+                        <div class="icon-group">
+                            <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                            </svg>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                         </div>
+                        <h3>TikTok Account Recovery</h3>
+                        <p>Banned or suspended on TikTok? We provide solutions to get your account back and active.</p>
+                        <div class="price">Starting from xxxx$</div>
+                        <ul>
+                            <li>High success rate</li>
+                            <li>24/7 support</li>
+                            <li>Professional handling</li>
+                            <li>Quick turnaround</li>
+                        </ul>
+                        <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
+                    </div>
 
-                        <div class="service-box">
-                            <div class="icon-group">
-                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
-                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
-                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
-                                </svg>
-                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <h3>Telegram Account Recovery</h3>
-                            <p>Regain access to your Telegram account, groups, or channels that have been compromised or banned.</p>
-                            <div class="price">Starting from xxxx$</div>
-                            <ul>
-                                <li>High success rate</li>
-                                <li>24/7 support</li>
-                                <li>Professional handling</li>
-                                <li>Quick turnaround</li>
-                            </ul>
-                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
+                    
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.3s;">
+                        <div class="icon-group">
+                            <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                            </svg>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                         </div>
+                        <h3>Telegram Account Recovery</h3>
+                        <p>Regain access to your Telegram account, groups, or channels that have been compromised or banned.</p>
+                        <div class="price">Starting from xxxx$</div>
+                        <ul>
+                            <li>High success rate</li>
+                            <li>24/7 support</li>
+                            <li>Professional handling</li>
+                            <li>Quick turnaround</li>
+                        </ul>
+                        <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
+                    </div>
 
-                        <div class="service-box">
-                            <div class="icon-group">
-                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
-                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
-                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
-                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
-                                </svg>
-                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                            </div>
-                            <h3>Twitter (X) Account Recovery</h3>
-                            <p>Facing issues with your X (Twitter) account? We help in recovering suspended or locked profiles.</p>
-                            <div class="price">Starting from xxxx$</div>
-                            <ul>
-                                <li>High success rate</li>
-                                <li>24/7 support</li>
-                                <li>Professional handling</li>
-                                <li>Quick turnaround</li>
-                            </ul>
-                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
+                    
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="icon-group">
+                            <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                            </svg>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                         </div>
+                        <h3>Twitter (X) Account Recovery</h3>
+                        <p>Facing issues with your X (Twitter) account? We help in recovering suspended or locked profiles.</p>
+                        <div class="price">Starting from xxxx$</div>
+                        <ul>
+                            <li>High success rate</li>
+                            <li>24/7 support</li>
+                            <li>Professional handling</li>
+                            <li>Quick turnaround</li>
+                        </ul>
+                        <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
                     </div>
                 </div>
             </div>
@@ -1138,44 +1134,7 @@
             });
         });
 
-        // --- NEW: AUTO-SCROLLING SLIDER SCRIPT ---
-        const slider = document.querySelector('.services-slider');
-        if (slider) {
-            let autoScrollTimer;
-            const scrollSpeed = 1; // Pixels to scroll per frame
-            const scrollInterval = 25; // Milliseconds between frames (approx 40fps)
-
-            // Calculate the halfway point (where the 5 original boxes end)
-            const maxScroll = slider.scrollWidth / 2;
-
-            function startAutoScroll() {
-                // Clear any existing timer to prevent stacking
-                clearInterval(autoScrollTimer);
-                
-                autoScrollTimer = setInterval(() => {
-                    slider.scrollLeft += scrollSpeed;
-                    
-                    // If scrolled past the end of the first set, jump back to the start
-                    if (slider.scrollLeft >= maxScroll) {
-                        // Use instant assignment instead of scrollTo() to prevent any "jump" or "glitch"
-                        slider.scrollLeft = 0;
-                    }
-                }, scrollInterval);
-            }
-
-            function stopAutoScroll() {
-                clearInterval(autoScrollTimer);
-            }
-
-            // Pause on hover/touch
-            slider.addEventListener('mouseenter', stopAutoScroll);
-            slider.addEventListener('mouseleave', startAutoScroll);
-            slider.addEventListener('touchstart', stopAutoScroll, { passive: true });
-            slider.addEventListener('touchend', startAutoScroll);
-
-            // Start the scrolling
-            startAutoScroll();
-        }
+        // --- AUTO-SCROLLING SLIDER SCRIPT (REMOVED) ---
 
     </script>
 
