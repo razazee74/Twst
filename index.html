@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Yusuf - Professional Services</title>
     
     <style>
@@ -39,8 +39,8 @@
         .preloader-star {
             width: 80px;
             height: 80px;
-            /* Star ko fly karne ke liye transition */
-            transition: transform 1s cubic-bezier(0.5, 0, 0.75, 0), opacity 0.5s ease;
+            /* Star ko fly karne ke liye transition (dheere se 1.5s) */
+            transition: transform 1.5s ease-in-out, opacity 0.5s ease;
         }
         .preloader-star svg {
             width: 100%;
@@ -54,7 +54,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Star ko fly karne ke liye class (JS se add hogi) */
+        /* Star ko fly karne ke liye class */
         .preloader-star.fly-to-header {
             transform: translate(var(--tx, -45vw), var(--ty, -48vh)) scale(0.35) rotate(720deg); 
             animation: none; /* Infinite spin rok do */
@@ -296,7 +296,8 @@
 
         <header>
             <div class="container">
-                <a href="#hero" id="logo">⭐</a> <nav>
+                <a href="#hero" id="logo">⭐</a>
+                <nav>
                     <a href="#services">Services</a>
                     <a href="#reviews">Reviews</a>
                     <a href="#contact">Contact</a>
@@ -415,34 +416,32 @@
             preloaderStar.style.setProperty('--tx', `${tx}px`);
             preloaderStar.style.setProperty('--ty', `${ty}px`);
 
-            // 3. Animation shuru karo (NEW TIME: 1000ms = 1 second)
+            // 1. Sirf 1 second (1000ms) tak spin karega
             setTimeout(() => {
                 
-                // Star ko fly karne wali class add karo
+                // Star ko fly karne wali class add karo (yeh 1.5s lega)
                 preloaderStar.classList.add('fly-to-header');
                 
                 // Text/dots ko gayab karne wali class add karo
                 preloader.classList.add('fading-out');
 
-                // --- YEH BADA CHANGE HAI ---
-                // Main content (website) ko FADE IN KARO
-                // (Ab yeh star ke land hone ka intezaar nahi karega)
-                mainContent.style.opacity = '1';
-                // (0.7s duration, 0.3s delay) -> 1s spin ke 0.3s baad fade in shuru hoga
-                mainContent.style.transition = 'opacity 0.7s ease-in 0.3s'; 
-
-                // 4. Jab star ki 1 second ki animation khatam ho:
+                // 2. Star ki 1.5s ki flight khatam hone ka intezaar karo
                 setTimeout(() => {
+                    
                     // Asli header wale star ko dikhao
                     headerLogo.style.opacity = '1';
                     
                     // Preloader ko poori tarah hata do
                     preloader.style.display = 'none';
 
-                }, 1000); // Yeh 1s star ki flight time se match karta hai
+                    // 3. AB website ko fade in karo
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 0.5s ease-in';
 
-            }, 1000); // NEW TIME: 1 second tak spin karega
-            // Total load time = 1000ms spin + 1000ms flight = 2 seconds
+                }, 1500); // Yeh 1.5s star ki flight time se match karta hai
+
+            }, 1000); // 1 second tak spin karega
+            // Total load time = 1s spin + 1.5s flight = 2.5 seconds
         });
 
 
@@ -456,14 +455,15 @@
             }
         });
 
-        // --- SCROLL-TO-REVEAL SCRIPT ---
+        // --- SCROLL-TO-REVEAL SCRIPT (BUG FIXED) ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observerCallback = (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.trippingtarget);
+                        // YAHAN BUG FIX KIYA GAYA HAI
+                        observer.unobserve(entry.target);
                     }
                 });
             };
@@ -483,4 +483,6 @@
         document.querySelectorAll('header nav a, .hero-button[href^="#"], a#logo[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-         
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+        
