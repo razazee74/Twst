@@ -398,9 +398,67 @@
             background: #1a1a1a;
         }
         
+        /* NEW: Wrapper to center the inline-block */
+        .headline-wrapper {
+            text-align: center;
+            margin-bottom: 50px; /* Replaces h2's margin */
+        }
+
+        /* NEW: Animated border box for headline */
+        .headline-border-box {
+            display: inline-block; /* Fit content */
+            position: relative;
+            border: 2px solid #333; /* The static border */
+            padding: 10px 30px;
+            border-radius: 8px;
+        }
+        
+        /* NEW: The animated "Diwali light" */
+        .headline-border-box::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--tos-blue);
+            border-radius: 50%;
+            /* Blue sparkle */
+            box-shadow: 0 0 8px var(--tos-blue), 0 0 15px var(--tos-blue), 0 0 20px var(--tos-blue);
+            
+            /* Start at top-left, centered on the border line */
+            top: -6px;  /* - (half dot size + half border size) */
+            left: -6px; /* - (half dot size + half border size) */
+            
+            /* Animation: 4s duration, linear speed, runs forever */
+            animation: light-run 4s linear infinite;
+        }
+        
+        /* NEW: Keyframes for the light animation */
+        @keyframes light-run {
+            0% { 
+                top: -6px; 
+                left: -6px; 
+            }
+            25% { 
+                top: -6px; 
+                left: calc(100% - 6px); /* Move along top edge */
+            }
+            50% { 
+                top: calc(100% - 6px); 
+                left: calc(100% - 6px); /* Move down right edge */
+            }
+            75% { 
+                top: calc(100% - 6px); 
+                left: -6px; /* Move along bottom edge */
+            }
+            100% { 
+                top: -6px; 
+                left: -6px; /* Move up left edge */
+            }
+        }
+
         #services h2 {
             font-size: 2.5rem; 
-            margin-bottom: 50px;
+            margin-bottom: 0; /* Margin is now on .headline-wrapper */
         }
         
         /* New slider container */
@@ -425,8 +483,7 @@
             -webkit-overflow-scrolling: touch; /* Smooth on iOS */
             scrollbar-width: none; /* Hide scrollbar (Firefox) */
             
-            /* Disable snapping for smooth auto-scroll */
-            scroll-behavior: smooth; 
+            /* Removed scroll-behavior: smooth to prevent JS conflict */
         }
         .services-slider::-webkit-scrollbar {
             display: none; /* Hide scrollbar (Chrome/Safari) */
@@ -437,14 +494,16 @@
             border: 1px solid #333; 
             padding: 30px;
             border-radius: 8px; 
-            width: 300px;
+            width: 340px; /* UPDATED: Wider */
+            min-height: 160px; /* UPDATED: Taller */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
             flex-shrink: 0; /* Prevents shrinking */
             
-            /* Make them visible by default, remove scroll reveal */
-            opacity: 1; 
-            transform: translateY(0);
+            /* Added for better vertical centering */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .service-box:hover { 
             transform: translateY(-10px); 
@@ -552,11 +611,12 @@
             .about-stats {
                 grid-template-columns: 1fr; /* Stack stats on small screens */
             }
-            .service-box, .review-box { width: 90%; }
+            .review-box { width: 90%; }
             
             /* Make service box width smaller on mobile */
             .service-box {
-                width: 280px;
+                width: 300px; /* UPDATED */
+                min-height: 150px; /* UPDATED */
             }
 
             /* Updated: About box ko kone se hataya */
@@ -565,8 +625,6 @@
             #about h2 { font-size: 2rem; }
             #about h3 { font-size: 1.4rem; }
             
-            /* FIXED: Removed width rule so button shrinks to fit */
-            /* .about-button-zentex { width: 90%; display: flex; } */
         }
     </style>
 </head>
@@ -698,7 +756,11 @@
 
         <section id="services">
             <div class="container">
-                <h2 class="reveal-on-scroll">Our Services</h2>
+                <div class="headline-wrapper">
+                    <div class="headline-border-box reveal-on-scroll">
+                        <h2>Our Services</h2>
+                    </div>
+                </div>
                 
                 <div class="slider-container">
                     <div class="services-slider">
@@ -914,20 +976,20 @@
             const scrollSpeed = 1; // Pixels to scroll per frame
             const scrollInterval = 25; // Milliseconds between frames (approx 40fps)
 
-            // Calculate the halfway point
+            // Calculate the halfway point (where the 5 original boxes end)
             const maxScroll = slider.scrollWidth / 2;
 
             function startAutoScroll() {
-                // Clear any existing timer
+                // Clear any existing timer to prevent stacking
                 clearInterval(autoScrollTimer);
                 
                 autoScrollTimer = setInterval(() => {
                     slider.scrollLeft += scrollSpeed;
                     
-                    // If scrolled to the end of the first set, jump back to the start
+                    // If scrolled past the end of the first set, jump back to the start
                     if (slider.scrollLeft >= maxScroll) {
-                        // Use 'auto' behavior for an instant jump
-                        slider.scrollTo({ left: 0, behavior: 'auto' });
+                        // Use instant assignment instead of scrollTo() to prevent any "jump" or "glitch"
+                        slider.scrollLeft = 0;
                     }
                 }, scrollInterval);
             }
