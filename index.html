@@ -435,7 +435,8 @@
             /* Removed border and shadow */
         }
         
-        #services h2 {
+        /* --- CHANGE 1: Review aur Service heading ko common kiya --- */
+        .headline-border-box h2 {
             font-size: 2.2rem; /* UPDATED: Font size thoda chhota */
             margin-bottom: 0;
             margin-top: 0;
@@ -587,7 +588,8 @@
         }
         #reviews { background: #1a1a1a; }
         
-        #reviews h2, #contact h2 {
+        /* --- CHANGE 2: Sirf #contact h2 rakha --- */
+        #contact h2 {
             font-size: 2.5rem; margin-bottom: 50px;
         }
         
@@ -595,15 +597,23 @@
             display: flex; justify-content: center;
             gap: 30px; flex-wrap: wrap;
         }
+        
+        /* --- CHANGE 3: Review box ko service box jaisa style diya --- */
         .review-box {
-            background: #222; border: 1px solid #333; padding: 30px;
-            border-radius: 8px; width: 300px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            background: var(--service-box-bg); /* #222 */
+            border: 1px solid var(--service-box-border); /* Dark Yellow Border */
+            padding: 20px; /* Service box jaisa padding */
+            border-radius: 12px; /* Service box jaisa corner */
+            width: 300px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 20px var(--service-box-shadow-glow); /* Service box jaisa glow */
             transition: transform 0.3s;
+            text-align: left; /* Service box jaisa align */
         }
         .review-box:hover { transform: translateY(-10px); }
+        
+        /* --- CHANGE 4: Review box ka title yellow kiya --- */
         .review-box h3 {
-            font-size: 1.5rem; color: #00aaff;
+            font-size: 1.5rem; color: var(--service-title-color); /* Yellow title */
             margin-bottom: 15px;
         }
         .review-box p.testimonial { font-style: italic; color: #ccc; }
@@ -695,6 +705,7 @@
             .reviews-container {
                 flex-direction: column;
                 gap: 20px;
+                align-items: center; /* Center review boxes on mobile */
             }
             .about-stats {
                 grid-template-columns: 1fr 1fr; 
@@ -717,7 +728,8 @@
             .headline-border-box {
                 padding: 1px 10px;
             }
-            #services h2 {
+            /* --- CHANGE 5: Common mobile heading size --- */
+            .headline-border-box h2 {
                 font-size: 1.8rem; /* Mobile pe thoda chhota */
             }
             
@@ -1018,25 +1030,56 @@
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                             </svg>
                         </div>
-                        <h3>Twitter (X) Account Recovery</h3>
+                        <h3>TɪᴋᴛᴏK SᴇʀᴠɪᴄᴇS</h3>
                         <p>Safe and secure support for TikTok — removals, booting, and smooth account management.</p></p>
                         <div class="price">Starting from xx$</div>
                         <ul>
                             <li>Tɪᴋᴛᴏᴋ Rᴇᴍᴏᴠᴀʟꜱ</li>
                             <li>Tɪᴋᴛᴏᴋ Bᴏᴏᴛɪɴɢ ( ʟɪᴋᴇ, ꜰᴏʟʟᴏᴡᴇʀꜱ, ᴄᴏᴍᴍᴇɴᴛꜱ ᴀɴᴅ ᴍᴏʀᴇ...)</li>
-                            <li>Professional handling</li>
+                            <li>Pʀᴏꜰᴇꜱꜱɪᴏɴᴀʟ Hᴀɴᴅʟɪɴɢ</li>
                             <li>Aɴᴅ Mᴀɴʏ Mᴏʀᴇ...</li>
                         </ul>
                         <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
                     </div>
-                </div>
+                    
+                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.5s;">
+                        <div class="icon-group">
+                            <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                            </svg>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <h3>New 6th Service</h3>
+                        <p>Aap yahan naye service ka description daal sakte hain.</p>
+                        <div class="price">Starting from xx$</div>
+                        <ul>
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                            <li>Feature 4</li>
+                        </ul>
+                        <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">GET STARTED</a>
+                    </div>
+                    </div>
             </div>
         </section>
 
 
         <section id="reviews">
             <div class="container">
-                <h2 class="reveal-on-scroll">Reviews</h2>
+                <div class="headline-wrapper">
+                    <div class="headline-border-box reveal-on-scroll">
+                        <h2>Reviews</h2>
+                    </div>
+                </div>
+                
                 <div class="reviews-container">
                     <div class="review-box reveal-on-scroll">
                         <h3>Amazing Service!</h3>
