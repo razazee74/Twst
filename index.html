@@ -284,11 +284,13 @@
             padding: 80px 0;
             text-align: center;
             color: var(--about-text-color);
+            position: relative; /* Added for glow */
+            overflow: hidden; /* Added for glow */
         }
         /* Updated: Added border and shadow to container */
         #about .container {
             max-width: 650px; /* Updated: Chhota dabba (was 700px) */
-            background-color: #000000; 
+            background-color: transparent; /* Changed from #000 */
             border: 1px solid #333; /* Patli line */
             border-radius: 15px; 
             padding: 40px; /* Thoda padding andar */
@@ -297,6 +299,7 @@
             
             position: relative;
             overflow: hidden;
+            z-index: 1; /* On top of section glow */
         }
         
         /* Added: Ensure content is above the glow */
@@ -396,6 +399,8 @@
             padding: 80px 0; 
             text-align: center; 
             background: #1a1a1a;
+            position: relative; /* Added for glow */
+            overflow: hidden; /* Added for glow */
         }
         
         /* NEW: Wrapper to center the inline-block */
@@ -417,48 +422,48 @@
         .headline-border-box::before {
             content: '';
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 30px; /* UPDATED: Lamba light */
+            height: 6px; /* UPDATED */
             background: var(--tos-blue);
-            border-radius: 50%;
-            /* Blue sparkle */
-            box-shadow: 0 0 8px var(--tos-blue), 0 0 15px var(--tos-blue), 0 0 20px var(--tos-blue);
+            border-radius: 3px; /* UPDATED */
+            /* UPDATED: Blue sparkle (faila hua) */
+            box-shadow: 0 0 15px var(--tos-blue), 0 0 25px var(--tos-blue), 0 0 35px var(--tos-blue);
             
-            /* Start at top-left, centered on the border line */
-            top: -6px;  /* - (half dot size + half border size) */
-            left: -6px; /* - (half dot size + half border size) */
+            /* UPDATED: Offsets for new size */
+            top: -4px;  
+            left: -15px; 
             
-            /* Animation: 4s duration, linear speed, runs forever */
             animation: light-run 4s linear infinite;
         }
         
         /* NEW: Keyframes for the light animation */
         @keyframes light-run {
             0% { 
-                top: -6px; 
-                left: -6px; 
+                top: -4px; 
+                left: -15px; 
             }
             25% { 
-                top: -6px; 
-                left: calc(100% - 6px); /* Move along top edge */
+                top: -4px; 
+                left: calc(100% - 15px); /* Move along top edge */
             }
             50% { 
-                top: calc(100% - 6px); 
-                left: calc(100% - 6px); /* Move down right edge */
+                top: calc(100% - 4px); 
+                left: calc(100% - 15px); /* Move down right edge */
             }
             75% { 
-                top: calc(100% - 6px); 
-                left: -6px; /* Move along bottom edge */
+                top: calc(100% - 4px); 
+                left: -15px; /* Move along bottom edge */
             }
             100% { 
-                top: -6px; 
-                left: -6px; /* Move up left edge */
+                top: -4px; 
+                left: -15px; /* Move up left edge */
             }
         }
 
         #services h2 {
             font-size: 2.5rem; 
             margin-bottom: 0; /* Margin is now on .headline-wrapper */
+            white-space: nowrap; /* UPDATED: Ek line mein rakho */
         }
         
         /* New slider container */
@@ -494,8 +499,8 @@
             border: 1px solid #333; 
             padding: 30px;
             border-radius: 8px; 
-            width: 340px; /* UPDATED: Wider */
-            min-height: 160px; /* UPDATED: Taller */
+            width: 360px; /* UPDATED: Wider */
+            min-height: 220px; /* UPDATED: Taller */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
             flex-shrink: 0; /* Prevents shrinking */
@@ -521,7 +526,12 @@
         /* ----- End Services Slider ----- */
 
 
-        #reviews, #contact { padding: 80px 0; text-align: center; }
+        #reviews, #contact { 
+            padding: 80px 0; 
+            text-align: center; 
+            position: relative; /* Added for glow */
+            overflow: hidden; /* Added for glow */
+        }
         #reviews { background: #1a1a1a; }
         
         #reviews h2, #contact h2 {
@@ -594,7 +604,28 @@
         }
         #tos-shield-btn:hover { background-color: #d4b100; }
 
-        /* ----- 7. Magic Tap Effect CSS (REMOVED) ----- */
+        /* ----- 7. NEW: GLOBAL GLOW ----- */
+        
+        /* Glow effect for sections */
+        #about::before, #services::before, #reviews::before, #contact::before {
+            content: ''; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            width: 800px; 
+            height: 800px;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
+            filter: blur(100px); 
+            opacity: 0.3; /* Subtle glow */
+            z-index: 0; /* Behind container */
+        }
+        
+        /* Ensure containers are on top of the section glow */
+        #services .container, #reviews .container, #contact .container, footer .container {
+            position: relative;
+            z-index: 1;
+        }
         
 
         /* Responsive adjustments */
@@ -603,7 +634,7 @@
             #hero h2 { font-size: 1.5rem; }
             .hero-star svg { width: 40px; height: 40px; }
             header nav { gap: 15px; }
-            .services-container, .reviews-container {
+            .reviews-container {
                 flex-direction: column;
                 gap: 20px;
             }
@@ -615,8 +646,8 @@
             
             /* Make service box width smaller on mobile */
             .service-box {
-                width: 300px; /* UPDATED */
-                min-height: 150px; /* UPDATED */
+                width: 320px; /* UPDATED */
+                min-height: 200px; /* UPDATED */
             }
 
             /* Updated: About box ko kone se hataya */
@@ -1012,4 +1043,3 @@
 
 </body>
 </html>
-    
