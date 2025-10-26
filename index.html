@@ -145,6 +145,7 @@
         .container {
             width: 90%; max-width: 1100px; margin: auto;
             overflow: hidden; padding: 0 20px;
+            box-sizing: border-box; /* Ensures padding doesn't break layout */
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
         
@@ -283,17 +284,30 @@
             padding: 80px 0;
             text-align: center;
             color: var(--about-text-color);
+            /* position: relative; */ /* Context set on .container */
+            /* overflow: hidden; */   /* Context set on .container */
         }
         /* Updated: Added border and shadow to container */
         #about .container {
-            max-width: 700px; /* Chhota dabba */
+            max-width: 650px; /* Updated: Chhota dabba (was 700px) */
             background-color: #000000; 
             border: 1px solid #333; /* Patli line */
             border-radius: 15px; 
             padding: 40px; /* Thoda padding andar */
             margin: auto;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05); /* Halka glow */
+            
+            /* Added for Magic Glow Effect */
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* Added: Ensure content is above the glow */
+        #about .container > * {
+            position: relative;
+            z-index: 1;
+        }
+        
         #about h2 {
             font-size: 2.8rem; /* Adjusted font size */
             color: var(--about-heading-color);
@@ -342,14 +356,15 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
+        
+        /* Updated: Green button styling */
         .about-button-zentex {
-            display: flex;
+            display: inline-flex; /* Updated: Fit to content */
             align-items: center;
             justify-content: center;
-            width: 300px; /* Fixed width */
+            /* width: 300px; */ /* Removed fixed width */
             margin: 0 auto;
-            padding: 15px 30px;
+            padding: 15px 25px; /* Slightly reduced padding */
             background: var(--about-button-bg); /* Updated: Green Gradient */
             border-radius: 30px;
             text-decoration: none;
@@ -357,7 +372,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
         .about-button-zentex:hover {
             transform: translateY(-3px);
@@ -457,21 +472,21 @@
         /* ----- 7. Magic Tap Effect CSS ----- */
         .tap-glow {
             position: absolute;
-            width: 200px; /* Size of the glow */
-            height: 200px;
-            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 70%);
-            filter: blur(50px);
+            width: 400px; /* Updated: Bada size */
+            height: 400px;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
+            filter: blur(80px); /* Updated: Jyada faila hua */
             opacity: 0;
             border-radius: 50%;
             pointer-events: none; /* Allows clicks to pass through */
-            z-index: 99;
+            z-index: 0; /* Updated: Behind content */
             transform: translate(-50%, -50%) scale(0);
-            animation: tap-fade-out 0.8s ease-out forwards;
+            animation: tap-fade-out 4s ease-out forwards; /* Updated: Dheere fade hoga */
         }
 
         @keyframes tap-fade-out {
-            0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.2); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.5); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
         }
 
         /* Responsive adjustments */
@@ -489,10 +504,13 @@
                 grid-template-columns: 1fr; /* Stack stats on small screens */
             }
             .service-box, .review-box { width: 90%; }
-            #about .container { padding: 20px; } /* Less padding on mobile */
+            
+            /* Updated: About box ko kone se hataya */
+            #about .container { padding: 20px; width: 85%; } 
+            
             #about h2 { font-size: 2rem; }
             #about h3 { font-size: 1.4rem; }
-            .about-button-zentex { width: 90%; }
+            .about-button-zentex { width: 90%; display: flex; } /* On mobile, let it be wide */
         }
     </style>
 </head>
@@ -594,14 +612,14 @@
                     with deep platform-specific knowledge, delivering unmatched 
                     results for our premium clientele.
                 </p>
-                <div class="about-stats reveal-on-scroll">
+                <div classm="about-stats reveal-on-scroll">
                     <div class="about-stat-item">
                         <div class="number">2+</div>
                         <div class="label">Years Experience</div>
                     </div>
                     <div class="about-stat-item">
                         <div class="number">300+</div>
-                        <div class="label">Client Reviews</div>
+                        <div classm="label">Clients</div>
                     </div>
                     <div class="about-stat-item">
                         <div class="number">24/7</div>
@@ -691,9 +709,6 @@
     </div>
 
     
-    <div id="tap-glow-container"></div>
-
-
     <script>
         
         // --- PRELOADER & FADE-IN SCRIPT (NEW ANIMATION) ---
@@ -802,17 +817,24 @@
             });
         });
 
-        // --- Magic Tap Effect Script ---
-        const tapGlowContainer = document.getElementById('tap-glow-container');
-        document.addEventListener('click', function(e) {
+        // --- Updated: Magic Tap Effect Script (Only in About box) ---
+        const aboutContainer = document.querySelector('#about .container'); 
+        
+        aboutContainer.addEventListener('click', function(e) {
             // Create a new glow element
             const glow = document.createElement('div');
             glow.classList.add('tap-glow');
-            tapGlowContainer.appendChild(glow);
+            
+            // Append directly to this container
+            this.appendChild(glow); 
 
-            // Position the glow at the click coordinates
-            glow.style.left = `${e.clientX}px`;
-            glow.style.top = `${e.clientY + window.scrollY}px`; // Adjust for scroll position
+            // Position the glow at the click coordinates *relative to the container*
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            glow.style.left = `${x}px`;
+            glow.style.top = `${y}px`;
 
             // Remove the glow after its animation is complete
             glow.addEventListener('animationend', () => {
@@ -824,3 +846,5 @@
 
 </body>
 </html>
+
+     
