@@ -1,31 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evexyn - Social Media Services</title>
+    <title>evexyn - social media services</title>
     
     <style>
-        /* Basic Setup */
+        /* basic setup */
         :root {
             --yellow-sparkle: #ffd700;
             --brand-glow: var(--yellow-sparkle); 
-            --tos-blue: #007BFF;
+            --tos-blue: #007bff; /* The blue color for professional services text */
+            --about-text-color: #e0e0e0; /* Slightly off-white for about section */
+            --about-heading-color: #ffffff; /* White for main about headings */
+            --about-stat-color: #ff69b4; /* Pinkish color for stats */
+            --about-button-bg: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); /* Gradient for Zentex button */
+            --about-button-text-color: #ffffff;
+            --zen-logo-color: #c900c9; /* Purpleish for Zentex logo dot */
         }
         
         body {
-            font-family: Arial, sans-serif;
+            font-family: arial, sans-serif;
             margin: 0;
             background-color: #0f0f0f;
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative; /* For tap effect */
         }
 
-        /* ----- 1. PRELOADER (NEW Star Animation) ----- */
+        /* ----- 1. preloader (new star animation) ----- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #0f0f0f; display: flex; flex-direction: column;
+            background-color: #000000; /* Updated: Full black background */
+            display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 9999;
             transition: background-color 0.5s ease-out 0.3s;
         }
@@ -36,16 +44,16 @@
             align-items: center;
         }
 
-        /* Dono stars ko ek jagah rakhne ke liye wrapper */
+        /* dono stars ko ek jagah rakhne ke liye wrapper */
         .preloader-star-wrapper {
             width: 80px;
             height: 80px;
             position: relative;
-            /* Fly animation */
+            /* fly animation */
             transition: transform 1s cubic-bezier(0.5, 0, 0.75, 0);
         }
         
-        /* Dono stars ke liye common style */
+        /* dono stars ke liye common style */
         .preloader-star-wrapper svg {
             width: 100%;
             height: 100%;
@@ -56,13 +64,13 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        /* 4-point star (Shuru mein dikhega aur ghomega) */
+        /* 4-point star (shuru mein dikhega aur ghomega) */
         #preloader-star-4point {
             opacity: 1;
             animation: spin 1.5s linear infinite;
         }
         
-        /* 5-point star (Shuru mein chhupa rahega) */
+        /* 5-point star (shuru mein chhupa rahega) */
         #preloader-star-5point {
             opacity: 0;
         }
@@ -72,21 +80,21 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Fly animation ki class */
+        /* fly animation ki class */
         .preloader-star-wrapper.fly-to-header {
             transform: translate(var(--tx, -45vw), var(--ty, -48vh)) scale(0.35);
         }
-        /* Fly karte time 4-point star gayab... */
+        /* fly karte time 4-point star gayab... */
         .fly-to-header #preloader-star-4point {
             opacity: 0;
-            animation: none; /* Spin rok do */
+            animation: none; /* spin rok do */
         }
         /* ...aur 5-point star dikhega */
         .fly-to-header #preloader-star-5point {
             opacity: 1;
         }
         
-        /* Preloader ka text */
+        /* preloader ka text */
         .preloader-text, .loading-dots {
             transition: opacity 0.3s ease;
         }
@@ -94,7 +102,7 @@
             font-size: 2.5rem; color: #fff; margin-top: 20px; margin-bottom: 5px;
             text-align: center; letter-spacing: 2px;
         }
-        /* Subtext ka color BLUE */
+        /* subtext ka color blue */
         .preloader-text p {
             font-size: 1rem; color: var(--tos-blue);
             text-align: center;
@@ -102,7 +110,7 @@
         }
         .loading-dots { display: flex; margin-top: 25px; }
         .loading-dots span {
-            width: 10px; height: 10px; background-color: var(--brand-glow);
+            width: 10px; height: 10px; background-color: var(--tos-blue); /* Updated: Blue dots */
             border-radius: 50%; margin: 0 5px;
             animation: dot-bounce 1.4s infinite ease-in-out both;
         }
@@ -117,7 +125,7 @@
         #preloader.fading-out .loading-dots { opacity: 0; }
         #main-content { opacity: 0; }
 
-        /* ----- 2. HEADER STYLES ----- */
+        /* ----- 2. header styles ----- */
         header {
             background: transparent;
             border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -139,7 +147,7 @@
         header #logo svg {
             width: 28px; height: 28px; fill: #ffffff; 
             display: block; transition: fill 0.3s;
-            /* Shuru mein chhupa rahega */
+            /* shuru mein chhupa rahega */
             opacity: 0;
         }
         header #logo:hover svg { fill: var(--brand-glow); }
@@ -152,7 +160,7 @@
         header nav a:hover { color: var(--brand-glow); }
 
 
-        /* ----- 3. HERO SECTION (NEW Cycling Background) ----- */
+        /* ----- 3. hero section (new cycling background) ----- */
         #hero {
             padding-top: 150px;
             padding-bottom: 100px;
@@ -161,16 +169,16 @@
             position: relative;
             overflow: hidden;
         }
-        /* Glow Color Changed */
+        /* glow color changed */
         #hero::before {
             content: ''; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); width: 800px; height: 800px; /* Thoda bada */
+            transform: translate(-50%, -50%); width: 800px; height: 800px; /* thoda bada */
             background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
-            filter: blur(100px); opacity: 0.5; /* Thoda faila hua */
+            filter: blur(100px); opacity: 0.5; /* thoda faila hua */
             z-index: 1;
         }
         
-        /* NEW: Cycling Icons Animation */
+        /* new: cycling icons animation */
         .cycling-background-icons {
             position: absolute;
             top: 50%; left: 50%;
@@ -189,20 +197,21 @@
             stroke-width: 4;
             fill-opacity: 0;
             opacity: 0;
-            animation: fade-cycle 16s linear infinite;
+            animation: fade-cycle 16s linear infinite; /* 4 icons * 4s each = 16s total */
         }
-        /* Har icon ko 4 second ka delay */
-        .cycling-background-icons svg:nth-child(2) { animation-delay: 4s; }
-        .cycling-background-icons svg:nth-child(3) { animation-delay: 8s; }
-        .cycling-background-icons svg:nth-child(4) { animation-delay: 12s; }
+        /* har icon ko 4 second ka delay */
+        .cycling-background-icons svg:nth-child(1) { animation-delay: 0s; } /* Instagram */
+        .cycling-background-icons svg:nth-child(2) { animation-delay: 4s; } /* Telegram */
+        .cycling-background-icons svg:nth-child(3) { animation-delay: 8s; } /* Twitter */
+        .cycling-background-icons svg:nth-child(4) { animation-delay: 12s; } /* Facebook */
         
         @keyframes fade-cycle {
             0%   { opacity: 0; }
-            10%  { opacity: 1; } /* 1.6s tak visible */
-            25%  { opacity: 0; } /* 2.4s mein fade out */
+            10%  { opacity: 1; } /* 1.6s tak visible (10% of 16s) */
+            25%  { opacity: 0; } /* 2.4s mein fade out (25% of 16s) */
             100% { opacity: 0; }
         }
-        /* --- End Cycling Animation --- */
+        /* --- end cycling animation --- */
 
         .hero-content { position: relative; z-index: 2; }
         
@@ -222,7 +231,7 @@
             font-size: 4rem;
             margin: 0;
             letter-spacing: 2px;
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: "segoe ui", arial, sans-serif;
         }
         #hero h2 {
             font-size: 2rem;
@@ -241,7 +250,7 @@
             font-style: italic;
         }
         
-        /* Buttons Wapas Aa Gaye */
+        /* buttons wapas aa gaye */
         .hero-buttons {
             margin-top: 40px; display: flex; flex-direction: column;
             align-items: center; gap: 15px;
@@ -256,14 +265,111 @@
         }
         .hero-button:hover { background: rgba(255, 255, 255, 0.2); }
 
-        /* ----- 4. SCROLL-TO-REVEAL STYLES ----- */
+        /* ----- 4. scroll-to-reveal styles ----- */
         .reveal-on-scroll {
-            opacity: 0; transform: translateY(50px);
+            opacity: 0; transform: translatey(50px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .reveal-on-scroll.visible { opacity: 1; transform: translatey(0); }
         
-        /* ----- 5. SERVICES, REVIEWS, CONTACT ----- */
+        /* ----- 5. new about section styles ----- */
+        #about {
+            background-color: #000000; /* Full black background */
+            padding: 80px 0;
+            text-align: center;
+            color: var(--about-text-color);
+        }
+        #about .container {
+            max-width: 700px; /* Adjust width to match screenshot */
+            background-color: #000000; /* Ensure container itself is also black */
+            border-radius: 15px; /* Slight rounding on the screenshot edges */
+            padding: 20px;
+            margin: auto;
+        }
+        #about h2 {
+            font-size: 2.8rem; /* Adjusted font size */
+            color: var(--about-heading-color);
+            margin-bottom: 20px;
+            font-weight: bold; /* Make it bold as in screenshot */
+            letter-spacing: 1px;
+        }
+        #about h3 {
+            font-size: 1.8rem; /* Adjusted font size */
+            color: var(--about-heading-color);
+            margin-bottom: 30px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+        #about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px 20px; /* Vertical and horizontal gap */
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+        .about-stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .about-stat-item .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--about-stat-color); /* Pinkish color */
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .about-stat-item .label {
+            font-size: 1rem;
+            color: var(--about-text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .about-button-zentex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px; /* Fixed width */
+            margin: 0 auto;
+            padding: 15px 30px;
+            background: var(--about-button-bg); /* Gradient background */
+            border-radius: 30px;
+            text-decoration: none;
+            color: var(--about-button-text-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .about-button-zentex:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+        .about-button-zentex .dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--zen-logo-color); /* Purpleish dot */
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .about-button-zentex .separator {
+            width: 1px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 15px;
+        }
+
+        /* Original Services, Reviews, Contact (shifted after About) */
         #services, #reviews, #contact { padding: 80px 0; text-align: center; }
         #services, #reviews { background: #1a1a1a; }
         
@@ -281,7 +387,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
         }
-        .service-box:hover, .review-box:hover { transform: translateY(-10px); }
+        .service-box:hover, .review-box:hover { transform: translatey(-10px); }
         .service-box h3, .review-box h3 {
             font-size: 1.5rem; color: #00aaff;
             margin-bottom: 15px;
@@ -311,7 +417,7 @@
             border-top: 1px solid #333;
         }
         
-        /* ----- 6. TOS BUTTON & PARCHI ----- */
+        /* ----- 6. tos button & parchi ----- */
         #tos-container {
             position: fixed; bottom: 40px; right: 20px;
             z-index: 1000; display: flex; align-items: center;
@@ -323,11 +429,11 @@
             color: white; font-weight: bold; font-size: 14px;
             margin-right: 10px;
             box-shadow: 0 0 15px var(--tos-blue);
-            opacity: 0; transform: translateX(20px);
+            opacity: 0; transform: translatex(20px);
             visibility: hidden; transition: all 0.3s ease;
         }
         #tos-parchi.visible {
-            opacity: 1; transform: translateX(0);
+            opacity: 1; transform: translatex(0);
             visibility: visible;
         }
         #tos-shield-btn {
@@ -339,6 +445,41 @@
         }
         #tos-shield-btn:hover { background-color: #d4b100; }
 
+        /* ----- 7. Magic Tap Effect CSS ----- */
+        .tap-glow {
+            position: absolute;
+            width: 200px; /* Size of the glow */
+            height: 200px;
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 70%);
+            filter: blur(50px);
+            opacity: 0;
+            border-radius: 50%;
+            pointer-events: none; /* Allows clicks to pass through */
+            z-index: 99;
+            transform: translate(-50%, -50%) scale(0);
+            animation: tap-fade-out 0.8s ease-out forwards;
+        }
+
+        @keyframes tap-fade-out {
+            0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 3rem; }
+            #hero h2 { font-size: 1.5rem; }
+            .hero-star svg { width: 40px; height: 40px; }
+            header nav { gap: 15px; }
+            .services-container, .reviews-container, .about-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .service-box, .review-box { width: 90%; }
+            #about h2 { font-size: 2rem; }
+            #about h3 { font-size: 1.4rem; }
+            .about-button-zentex { width: 90%; }
+        }
     </style>
 </head>
 <body>
@@ -347,17 +488,17 @@
         <div class="preloader-content">
             
             <div class="preloader-star-wrapper">
-                <svg id="preloader-star-4point" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
+                <svg id="preloader-star-4point" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50,0 L65.45,34.55 L100,50 L65.45,65.45 L50,100 L34.55,65.45 L0,50 L34.55,34.55 Z"/>
                 </svg>
-                <svg id="preloader-star-5point" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M512 198.5l-186.7-32.3L256 0 186.7 166.2 0 198.5l133.3 145.1L99.2 512 256 422.2 412.8 512l-34.1-168.4L512 198.5z"/>
+                <svg id="preloader-star-5point" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M256,0 L330.6,183.9 L512,198.5 L376.7,324.1 L412.8,512 L256,422.2 L99.2,512 L135.3,324.1 L0,198.5 L181.4,183.9 L256,0 Z"/>
                 </svg>
             </div>
 
             <div class="preloader-text">
-                <h1>MySite</h1>
-                <p>Professional Services</p> </div>
+                <h1>mysite</h1>
+                <p>professional services</p> </div>
             <div class="loading-dots">
                 <span></span>
                 <span></span>
@@ -371,14 +512,14 @@
         <header>
             <div class="container">
                 <a href="#hero" id="logo">
-                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M512 198.5l-186.7-32.3L256 0 186.7 166.2 0 198.5l133.3 145.1L99.2 512 256 422.2 412.8 512l-34.1-168.4L512 198.5z"/>
+                    <svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256,0 L330.6,183.9 L512,198.5 L376.7,324.1 L412.8,512 L256,422.2 L99.2,512 L135.3,324.1 L0,198.5 L181.4,183.9 L256,0 Z"/>
                     </svg>
                 </a>
                 <nav>
-                    <a href="#services">Services</a>
-                    <a href="#reviews">Reviews</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#about">about</a> <a href="#services">services</a>
+                    <a href="#reviews">reviews</a>
+                    <a href="#contact">contact</a>
                 </nav>
             </div>
         </header>
@@ -386,19 +527,19 @@
         <section id="hero">
             
             <div class="cycling-background-icons">
-                <svg viewBox="0 0 100 100">
-                    <path d="M30 10 H70 C81 10 90 19 90 30 V70 C90 81 81 90 70 90 H30 C19 90 10 81 10 70 V30 C10 19 19 10 30 10 Z" />
-                    <path d="M50 35 C41.7 35 35 41.7 35 50 C35 58.3 41.7 65 50 65 C58.3 65 65 58.3 65 50 C65 41.7 58.3 35 50 35 Z" />
-                    <circle cx="70" cy="30" r="4" fill="#fff" />
+                <svg viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
-                <svg viewBox="0 0 32 32">
-                    <path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm8.342 9.77l-2.66 12.443c-.22 1.034-1.372 1.25-2.13.62l-4.22-3.13-2.04 1.96c-.22.22-.51.32-.8.32l.29-4.3 7.82-7.06c.33-.3-.15-.47-.6-.28l-9.67 6.05-4.14-1.28c-1.01-.31-1.03-1.07.2-1.55l14.7-5.59c.86-.33 1.63.2 1.31 1.25z" fill="#fff" stroke="none" />
+                <svg viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                    <path d="M22.5,9.5L9,15l4.5,3.5l-4.5,4l15-7l-8.5-4.5z"/>
                 </svg>
-                <svg viewBox="0 0 32 32">
-                    <path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm6.203 9.713c-.07.01-1.432.41-3.332.41-1.07 0-2.12-.17-3.08-.48v8.66c0 1.94-.65 3.73-1.76 5.11-.2.24-.48.4-.78.48-1.17.3-2.45.16-3.48-.4-1.04-.56-1.84-1.48-2.22-2.6-.2-.6-.27-1.22-.22-1.83.07-.63.3-1.23.68-1.74.8-1.03 2.04-1.66 3.36-1.7v-4.4c-3.1.28-5.83 2-7.5 4.4-.7 1-1.2 2.18-1.4 3.4-.2 1.2-.1 2.4.3 3.5.4 1.1 1 2.1 1.8 3 .8 1 1.8 1.8 3 2.4 1.1.6 2.4.9 3.7.9 1.3 0 2.6-.3 3.7-.9 1.1-.6 2.1-1.4 2.9-2.4.8-1 1.4-2.1 1.7-3.4.3-1.2.4-2.5.1-3.7-.3-1.2-.8-2.3-1.5-3.3v-3.66c1.83.45 3.96.3 5.46-.46.3-.15.53-.4.65-.7.14-.3.15-.63.03-.93-.15-.36-.44-.65-.8-.8z" fill="#fff" stroke="none" />
+                <svg viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c1.7 1.1 3.9 1.8 6.1 1.8 7.4 0 11.5-6.2 11.5-11.5v-.5a7.07 7.07 0 0 0 1.85-1.94c-.6-.1-1.2-.2-1.8-.3z"></path>
                 </svg>
-                <svg viewBox="0 0 32 32">
-                    <path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm8.15 11.13c.01.16.01.32.01.48 0 4.9-3.73 10.55-10.55 10.55-2.1 0-4.05-.61-5.69-1.67.29.03.58.05.88.05 1.74 0 3.34-.59 4.61-1.59-1.63-.03-3-1.11-3.47-2.6.23.04.46.07.7.07.34 0 .67-.04.99-.13-1.7-.34-2.98-1.84-2.98-3.68v-.05c.5.28 1.07.45 1.68.46-.99-.67-1.64-1.8-1.64-3.06 0-.67.18-1.29.5-1.82 1.83 2.25 4.56 3.73 7.62 3.86-.06-.27-.1-.55-.1-.83 0-2.01 1.63-3.64 3.64-3.64 1.05 0 1.99.44 2.66 1.15.83-.16 1.61-.47 2.31-.88-.27.85-.85 1.57-1.61 2.01.74-.09 1.44-.29 2.09-.57-.5.73-1.15 1.36-1.89 1.86z" fill="#fff" stroke="none" />
+                <svg viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                 </svg>
             </div>
 
@@ -406,42 +547,80 @@
                 
                 <div class="hero-title-container">
                     <div class="hero-star">
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
+                        <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50,0 L65.45,34.55 L100,50 L65.45,65.45 L50,100 L34.55,65.45 L0,50 L34.55,34.55 Z"/>
                         </svg>
                     </div>
-                    <h1>EᴠᴇxʏɪN</h1>
+                    <h1>eᴠᴇxʏɪn</h1>
                 </div>
 
-                <h2>#1 Social Media Services</h2>
+                <h2>#1 social media services</h2>
                 
                 <p class="new-description">
-                    <i>Expert in banning & recovering accounts — Instagram, Telegram, TikTok & more. Fast, secure & trusted service to get your account back or take it down</i>
+                    <i>expert in banning & recovering accounts — instagram, telegram, tiktok & more. fast, secure & trusted service to get your account back or take it down</i>
                 </p>
 
                 <div class="hero-buttons">
-                    <a href="#services" class="hero-button">View Services</a>
-                    <a href="#contact" class="hero-button">Contact Now</a>
+                    <a href="#about" class="hero-button">learn more</a> <a href="#contact" class="hero-button">contact now</a>
                 </div>
 
             </div>
         </section>
 
+        <section id="about">
+            <div class="container">
+                <h2 class="reveal-on-scroll" style="font-family: Arial, sans-serif;">About Zentex</h2>
+                <h3 class="reveal-on-scroll" style="font-family: Arial, sans-serif;">The Premier Account Recovery Specialist</h3>
+                <p class="reveal-on-scroll">
+                    Zentex is the industry leader in social media account 
+                    services, specializing in Instagram and Facebook platforms. 
+                    Our proprietary methods combine cutting-edge technical expertise 
+                    with deep platform-specific knowledge, delivering unmatched 
+                    results for our premium clientele.
+                </p>
+                <div class="about-stats reveal-on-scroll">
+                    <div class="about-stat-item">
+                        <div class="number">5+</div>
+                        <div class="label">Years Experience</div>
+                    </div>
+                    <div class="about-stat-item">
+                        <div class="number">1000+</div>
+                        <div class="label">Accounts Recovered</div>
+                    </div>
+                    <div class="about-stat-item">
+                        <div class="number">24/7</div>
+                        <div class="label">Support</div>
+                    </div>
+                    <div class="about-stat-item">
+                        <div class="number">100%</div>
+                        <div class="label">Success Rate</div>
+                    </div>
+                </div>
+                <a href="#contact" class="about-button-zentex reveal-on-scroll">
+                    <span class="dot"></span>
+                    <span>ZENTEX</span>
+                    <span class="separator"></span>
+                    <span>CYBER SECURITY</span>
+                </a>
+            </div>
+        </section>
+
+
         <section id="services">
             <div class="container">
-                <h2 class="reveal-on-scroll">Our Services</h2>
+                <h2 class="reveal-on-scroll">our services</h2>
                 <div class="services-container">
                     <div class="service-box reveal-on-scroll">
-                        <h3>Service One</h3>
-                        <p>Description of the first service. Explain what you offer and why it's valuable.</p>
+                        <h3>service one</h3>
+                        <p>description of the first service. explain what you offer and why it's valuable.</p>
                     </div>
                     <div class="service-box reveal-on-scroll" style="transition-delay: 0.1s;">
-                        <h3>Service Two</h3>
-                        <p>Description of the second service. Keep it clear and concise for your visitors.</p>
+                        <h3>service two</h3>
+                        <p>description of the second service. keep it clear and concise for your visitors.</p>
                     </div>
                     <div class="service-box reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>Service Three</h3>
-                        <p>Description of the third service. This layout is perfect for three main features.</p>
+                        <h3>service three</h3>
+                        <p>description of the third service. this layout is perfect for three main features.</p>
                     </div>
                 </div>
             </div>
@@ -449,22 +628,22 @@
 
         <section id="reviews">
             <div class="container">
-                <h2 class="reveal-on-scroll">Reviews</h2>
+                <h2 class="reveal-on-scroll">reviews</h2>
                 <div class="reviews-container">
                     <div class="review-box reveal-on-scroll">
-                        <h3>Amazing Service!</h3>
-                        <p class="testimonial">"Incredible work, got my account back faster than I thought possible. Highly recommend."</p>
-                        <p class="client-name">- Client A</p>
+                        <h3>amazing service!</h3>
+                        <p class="testimonial">"incredible work, got my account back faster than i thought possible. highly recommend."</p>
+                        <p class="client-name">- client a</p>
                     </div>
                     <div class="review-box reveal-on-scroll" style="transition-delay: 0.1s;">
-                        <h3>Life Saver</h3>
-                        <p class="testimonial">"I thought my business page was gone forever. A true professional and a life saver."</p>
-                        <p class="client-name">- Client B</p>
+                        <h3>life saver</h3>
+                        <p class="testimonial">"i thought my business page was gone forever. a true professional and a life saver."</p>
+                        <p class="client-name">- client b</p>
                     </div>
                     <div class="review-box reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>100% Legit</h3>
-                        <p class="testimonial">"Fast communication and got the job done. Don't waste time with others."</p>
-                        <p class="client-name">- Client C</p>
+                        <h3>100% legit</h3>
+                        <p class="testimonial">"fast communication and got the job done. don't waste time with others."</p>
+                        <p class="client-name">- client c</p>
                     </div>
                 </div>
             </div>
@@ -472,33 +651,35 @@
 
         <section id="contact">
             <div class="container">
-                <h2 class="reveal-on-scroll">Ready to Get Started?</h2>
-                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">Reach out for professional and rapid response.</p>
+                <h2 class="reveal-on-scroll">ready to get started?</h2>
+                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">reach out for professional and rapid response.</p>
                 <a href="https://t.me/reurge" class="cta-button reveal-on-scroll" style="transition-delay: 0.2s;" target="_blank">
-                    Contact on Telegram: @reurge
+                    contact on telegram: reurge
                 </a>
             </div>
         </section>
 
         <footer>
             <div class="container">
-                <p>&copy; 2025 Evexyn. All rights reserved.</p>
+                <p>&copy; 2025 evexyn. all rights reserved.</p>
             </div>
         </footer>
 
     </div> 
     
     <div id="tos-container">
-        <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank" id="tos-parchi">
-            Terms Of Service
+        <a href="https://telegra.ph/adgenie-terms-of-service-09-18-2" target="_blank" id="tos-parchi" aria-label="Terms of Service">
+            terms of service
         </a>
-        <button id="tos-shield-btn">🛡️</button>
+        <button id="tos-shield-btn" aria-label="Toggle Terms of Service">🛡️</button>
     </div>
+
+    <div id="tap-glow-container"></div>
 
 
     <script>
         
-        // --- PRELOADER & FADE-IN SCRIPT (NEW ANIMATION) ---
+        // --- preloader & fade-in script (new animation) ---
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             const preloaderStarWrapper = document.querySelector('.preloader-star-wrapper');
@@ -506,7 +687,7 @@
             const headerLogo = document.getElementById('logo');
             const headerLogoSvg = headerLogo.querySelector('svg');
 
-            headerLogoSvg.style.opacity = '0'; // Header logo shuru mein hide
+            headerLogoSvg.style.opacity = '0'; // header logo shuru mein hide
 
             const logoRect = headerLogo.getBoundingClientRect();
             const starRect = preloaderStarWrapper.getBoundingClientRect();
@@ -517,36 +698,36 @@
             preloaderStarWrapper.style.setProperty('--tx', `${tx}px`);
             preloaderStarWrapper.style.setProperty('--ty', `${ty}px`);
 
-            // 1. Sirf 1.2 second (1200ms) tak spin karega
+            // 1. sirf 1.2 second (1200ms) tak spin karega
             setTimeout(() => {
                 
-                // Star ko fly karne wali class add karo (yeh 1s lega)
+                // star ko fly karne wali class add karo (yeh 1s lega)
                 preloaderStarWrapper.classList.add('fly-to-header');
                 
-                // Text/dots ko gayab karne wali class add karo
+                // text/dots ko gayab karne wali class add karo
                 preloader.classList.add('fading-out');
                 
-                // Website ko fade-in karna shuru karo (0.5s delay)
+                // website ko fade-in karna shuru karo (0.5s delay)
                 mainContent.style.transition = 'opacity 0.5s ease-in 0.5s';
                 mainContent.style.opacity = '1';
 
-                // 2. Star ki 1s ki flight khatam hone ka intezaar karo
+                // 2. star ki 1s ki flight khatam hone ka intezaar karo
                 setTimeout(() => {
                     
-                    // Asli header wale star ko dikhao
+                    // asli header wale star ko dikhao
                     headerLogoSvg.style.opacity = '1';
                     
-                    // Preloader ko poori tarah hata do
+                    // preloader ko poori tarah hata do
                     preloader.style.display = 'none';
 
-                }, 1000); // Yeh 1s star ki flight time se match karta hai
+                }, 1000); // yeh 1s star ki flight time se match karta hai
 
             }, 1200); // 1.2 second tak spin karega
-            // Total load time = 1.2s spin + 1s flight = 2.2 seconds
+            // total load time = 1.2s spin + 1s flight = 2.2 seconds
         });
 
 
-        // --- HEADER SCROLL EFFECT SCRIPT ---
+        // --- header scroll effect script ---
         const header = document.querySelector('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -556,7 +737,7 @@
             }
         });
 
-        // --- SCROLL-TO-REVEAL SCRIPT ---
+        // --- scroll-to-reveal script ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observerCallback = (entries, observer) => {
@@ -572,14 +753,14 @@
             revealElements.forEach(el => { observer.observe(el); });
         });
 
-        // --- TOS PARCHI SCRIPT ---
+        // --- tos parchi script ---
         const tosShieldBtn = document.getElementById('tos-shield-btn');
         const tosParchi = document.getElementById('tos-parchi');
         tosShieldBtn.addEventListener('click', () => {
             tosParchi.classList.toggle('visible');
         });
 
-        // --- SMOOTH SCROLL SCRIPT ---
+        // --- smooth scroll script ---
         document.querySelectorAll('header nav a, .hero-button[href^="#"], a#logo[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -602,13 +783,25 @@
             });
         });
 
-        // --- Heartbeat script (ab buttons par hai, iski zaroorat nahi) ---
-        // Lekin smooth scroll ke liye hero-button selector add kar diya hai upar.
+        // --- Magic Tap Effect Script ---
+        const tapGlowContainer = document.getElementById('tap-glow-container');
+        document.addEventListener('click', function(e) {
+            // Create a new glow element
+            const glow = document.createElement('div');
+            glow.classList.add('tap-glow');
+            tapGlowContainer.appendChild(glow);
+
+            // Position the glow at the click coordinates
+            glow.style.left = `${e.clientX}px`;
+            glow.style.top = `${e.clientY + window.scrollY}px`; // Adjust for scroll position
+
+            // Remove the glow after its animation is complete
+            glow.addEventListener('animationend', () => {
+                glow.remove();
+            });
+        });
 
     </script>
 
 </body>
 </html>
-
-
-  
