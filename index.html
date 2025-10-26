@@ -8,9 +8,10 @@
     <style>
         /* Basic Setup */
         :root {
-            /* PURPLE se BLUE mein change kar diya */
-            --brand-glow: #007BFF; 
             --yellow-sparkle: #ffd700;
+            /* BRAND GLOW AB YELLOW HAI */
+            --brand-glow: var(--yellow-sparkle); 
+            --tos-blue: #007BFF; /* TOS Parchi ke liye naya blue */
         }
         
         body {
@@ -22,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- 1. PRELOADER ----- */
+        /* ----- 1. PRELOADER (Aadha time) ----- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #0f0f0f; display: flex; flex-direction: column;
@@ -106,7 +107,7 @@
         header nav a:hover { color: var(--brand-glow); } /* Color changed */
 
 
-        /* ----- 3. NEW HERO SECTION (Text, Star, Icon, Color Updated) ----- */
+        /* ----- 3. HERO SECTION (Buttons Hatakar Icons) ----- */
         #hero {
             padding-top: 150px;
             padding-bottom: 100px;
@@ -123,7 +124,6 @@
             filter: blur(80px); opacity: 0.6; z-index: 1;
         }
         
-        /* Background Icon Size Changed */
         .background-svg-animation {
             position: absolute;
             top: 50%;
@@ -131,7 +131,7 @@
             transform: translate(-50%, -50%);
             z-index: 0;
             opacity: 0.15;
-            width: 400px; /* Bada kar diya (300px se) */
+            width: 400px;
             height: 400px;
         }
         .draw-path {
@@ -160,57 +160,83 @@
 
         .hero-content { position: relative; z-index: 2; }
         
-        /* Star aur Title ko ek line mein laane ke liye */
         .hero-title-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Star aur text ke beech gap */
+            gap: 20px;
         }
         .hero-star svg {
-            width: 60px; /* Size adjust kiya */
+            width: 60px;
             height: 60px;
             fill: #ffffff;
-            margin-bottom: 0; /* Upar ka margin hata diya */
+            margin-bottom: 0;
         }
-        /* New Title */
         #hero h1 {
             font-size: 4rem;
             margin: 0;
-            letter-spacing: 2px; /* Thoda spacing adjust kiya */
-            font-family: "Segoe UI", Arial, sans-serif; /* Font ko text se match kiya */
+            letter-spacing: 2px;
+            font-family: "Segoe UI", Arial, sans-serif;
         }
-        /* New Subheading */
         #hero h2 {
             font-size: 2rem;
             margin-top: 25px;
             color: #fff;
             font-weight: 500;
         }
-        /* New Description */
+        /* New Italic Description */
         #hero p.new-description {
             font-size: 1.1rem;
             color: #ccc;
             margin-top: 25px;
             line-height: 1.7;
-            max-width: 600px; /* Text ko thoda chhota rakha */
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-style: italic; /* ITALIC TEXT */
         }
         
-        .hero-buttons {
-            margin-top: 40px; display: flex; flex-direction: column;
-            align-items: center; gap: 15px;
+        /* NEW: Social Icons Container */
+        .hero-icons-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Icons ke beech gap */
+            flex-wrap: wrap; /* Mobile par neeche aa jayenge */
+            cursor: pointer; /* Clickable dikhane ke liye */
         }
-        .hero-button {
-            display: inline-block; color: #fff; padding: 12px 30px;
-            font-size: 18px; text-decoration: none; border-radius: 25px;
-            font-weight: bold; width: 250px;
+        .social-icon {
+            width: 50px;
+            height: 50px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px); transition: background 0.3s;
+            border-radius: 12px;
+            padding: 10px;
+            box-sizing: border-box; /* Padding ko size mein include karne ke liye */
+            transition: transform 0.2s ease, background-color 0.2s;
         }
-        .hero-button:hover { background: rgba(255, 255, 255, 0.2); }
+        .social-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px); /* Hover par thoda upar */
+        }
+
+        /* NEW: Icon Heartbeat Animation */
+        .hero-icons-container.animate-all .social-icon {
+            /* 1 bar animation chalega */
+            animation: heartbeat 0.5s ease 1;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); } /* Thoda bada hoga */
+            100% { transform: scale(1); }
+        }
 
         /* ----- 4. SCROLL-TO-REVEAL STYLES ----- */
         .reveal-on-scroll {
@@ -252,11 +278,14 @@
 
         #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
         .cta-button {
-            display: inline-block; background: var(--brand-glow); color: #fff;
+            display: inline-block; background: var(--brand-glow); color: #0f0f0f; /* Text color change */
             padding: 12px 25px; font-size: 18px; text-decoration: none;
-            border-radius: 5px; font-weight: bold; transition: background 0.3s;
+            border-radius: 5px; font-weight: bold; transition: background 0.3s, color 0.3s;
         }
-        .cta-button:hover { background: #0056b3; } /* Thoda dark blue */
+        .cta-button:hover {
+            background: #d4b100; /* Thoda dark yellow */
+            color: #000;
+        }
 
         footer {
             background: #1a1a1a; color: #777;
@@ -264,17 +293,19 @@
             border-top: 1px solid #333;
         }
         
-        /* ----- 6. TOS BUTTON & PARCHI ----- */
+        /* ----- 6. TOS BUTTON & PARCHI (Shadow Updated) ----- */
         #tos-container {
             position: fixed; bottom: 40px; right: 20px;
             z-index: 1000; display: flex; align-items: center;
         }
         #tos-parchi {
-            background: #222; border: 1px solid var(--yellow-sparkle);
+            background: #222;
+            /* Border aur Shadow ab BLUE hain */
+            border: 1px solid var(--tos-blue);
             padding: 10px 15px; border-radius: 5px; text-decoration: none;
             color: white; font-weight: bold; font-size: 14px;
             margin-right: 10px;
-            box-shadow: 0 0 15px var(--yellow-sparkle);
+            box-shadow: 0 0 15px var(--tos-blue);
             opacity: 0; transform: translateX(20px);
             visibility: hidden; transition: all 0.3s ease;
         }
@@ -283,13 +314,13 @@
             visibility: visible;
         }
         #tos-shield-btn {
-            background-color: var(--brand-glow); color: white; border: none;
+            background-color: var(--brand-glow); color: #0f0f0f; border: none;
             border-radius: 50%; width: 50px; height: 50px;
             font-size: 24px; line-height: 50px; text-align: center;
             cursor: pointer; transition: background-color 0.3s;
             z-index: 1001;
         }
-        #tos-shield-btn:hover { background-color: #0056b3; }
+        #tos-shield-btn:hover { background-color: #d4b100; }
 
     </style>
 </head>
@@ -351,14 +382,32 @@
                 </div>
 
                 <h2>#1 Social Media Services</h2>
+                
                 <p class="new-description">
-                    EXPERT IN BANNING & RECOVERING ACCOUNT ACROSS INSTAGRAM, TELEGRAM, TIKTOK, AND MORE — fast, secure, and trusted solutions to get your account back safely
+                    <i>Expert in banning & recovering accounts — Instagram, Telegram, TikTok & more. Fast, secure & trusted service to get your account back or take it down</i>
                 </p>
 
-                <div class="hero-buttons">
-                    <a href="#services" class="hero-button">View Services</a>
-                    <a href="#contact" class="hero-button">Contact Now</a>
+                <div class="hero-icons-container">
+                    <div class="social-icon">
+                        <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm0 4.8c3.418 0 3.824.015 5.176.074 1.306.06 2.052.28 2.578.47C25.04 5.76 26.24 6.96 26.656 8.27c.19.526.41 1.272.47 2.578C27.185 12.176 27.2 12.582 27.2 16c0 3.418-.015 3.824-.074 5.176-.06 1.306-.28 2.052-.47 2.578-.417 1.31-1.617 2.51-2.927 2.927-.526.19-1.272.41-2.578.47C19.824 27.185 19.418 27.2 16 27.2c-3.418 0-3.824-.015-5.176-.074-1.306-.06-2.052-.28-2.578-.47C6.936 26.24 5.736 25.04 5.32 23.73c-.19-.526-.41-1.272-.47-2.578C4.815 19.824 4.8 19.418 4.8 16c0-3.418.015-3.824.074-5.176.06-1.306.28-2.052.47-2.578C5.76 6.936 6.96 5.736 8.27 5.32c.526-.19 1.272-.41 2.578-.47C12.176 4.815 12.582 4.8 16 4.8zm0 3.103c-2.73 0-4.945 2.215-4.945 4.945S13.27 20.79 16 20.79s4.945-2.215 4.945-4.945-2.215-4.942-4.945-4.942zm0 8.09c-1.74 0-3.148-1.407-3.148-3.147s1.408-3.148 3.148-3.148 3.148 1.408 3.148 3.148-1.408 3.147-3.148 3.147zm5.103-8.293c-.66 0-1.197.536-1.197 1.196s.537 1.196 1.197 1.196 1.196-.536 1.196-1.196-.536-1.196-1.196-1.196z"/></svg>
+                    </div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm8.342 9.77l-2.66 12.443c-.22 1.034-1.372 1.25-2.13.62l-4.22-3.13-2.04 1.96c-.22.22-.51.32-.8.32l.29-4.3 7.82-7.06c.33-.3-.15-.47-.6-.28l-9.67 6.05-4.14-1.28c-1.01-.31-1.03-1.07.2-1.55l14.7-5.59c.86-.33 1.63.2 1.31 1.25z"/></svg>
+                    </div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm6.203 9.713c-.07.01-1.432.41-3.332.41-1.07 0-2.12-.17-3.08-.48v8.66c0 1.94-.65 3.73-1.76 5.11-.2.24-.48.4-.78.48-1.17.3-2.45.16-3.48-.4-1.04-.56-1.84-1.48-2.22-2.6-.2-.6-.27-1.22-.22-1.83.07-.63.3-1.23.68-1.74.8-1.03 2.04-1.66 3.36-1.7v-4.4c-3.1.28-5.83 2-7.5 4.4-.7 1-1.2 2.18-1.4 3.4-.2 1.2-.1 2.4.3 3.5.4 1.1 1 2.1 1.8 3 .8 1 1.8 1.8 3 2.4 1.1.6 2.4.9 3.7.9 1.3 0 2.6-.3 3.7-.9 1.1-.6 2.1-1.4 2.9-2.4.8-1 1.4-2.1 1.7-3.4.3-1.2.4-2.5.1-3.7-.3-1.2-.8-2.3-1.5-3.3v-3.66c1.83.45 3.96.3 5.46-.46.3-.15.53-.4.65-.7.14-.3.15-.63.03-.93-.15-.36-.44-.65-.8-.8z"/></svg>
+                    </div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm0 4.31l4.89 4.89-4.89 4.89-4.89-4.89L16 4.31zm-7.07 7.07l4.89 4.89-4.89 4.89-2.82-2.82v-4.14l2.82-2.82zm7.07 0l4.89 4.89-2.82 2.82h-4.14l-4.89-4.89 4.89-4.89 2.07 2.07zm7.07 0l2.82 2.82v4.14l-2.82 2.82-4.89-4.89 4.89-4.89zm-7.07 7.07l4.89 4.89-4.89 4.89-4.89-4.89 4.89-4.89z"/></svg>
+                    </div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm4.27 10.02h-2.81c-.55 0-.96.47-.96.96v1.98h3.77v2.97h-3.77v9.04h-3.57v-9.04h-2.97v-2.97h2.97v-1.98c0-2.42 1.98-4.4 4.4-4.4h2.97v2.97z"/></svg>
+                    </div>
+                    <div class="social-icon">
+                         <svg viewBox="0 0 32 32"><path d="M16 0C7.164 0 0 7.164 0 16s7.164 16 16 16 16-7.164 16-16S24.836 0 16 0zm8.15 11.13c.01.16.01.32.01.48 0 4.9-3.73 10.55-10.55 10.55-2.1 0-4.05-.61-5.69-1.67.29.03.58.05.88.05 1.74 0 3.34-.59 4.61-1.59-1.63-.03-3-1.11-3.47-2.6.23.04.46.07.7.07.34 0 .67-.04.99-.13-1.7-.34-2.98-1.84-2.98-3.68v-.05c.5.28 1.07.45 1.68.46-.99-.67-1.64-1.8-1.64-3.06 0-.67.18-1.29.5-1.82 1.83 2.25 4.56 3.73 7.62 3.86-.06-.27-.1-.55-.1-.83 0-2.01 1.63-3.64 3.64-3.64 1.05 0 1.99.44 2.66 1.15.83-.16 1.61-.47 2.31-.88-.27.85-.85 1.57-1.61 2.01.74-.09 1.44-.29 2.09-.57-.5.73-1.15 1.36-1.89 1.86z"/></svg>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -396,114 +445,4 @@
                         <p class="testimonial">"I thought my business page was gone forever. A true professional and a life saver."</p>
                         <p class="client-name">- Client B</p>
                     </div>
-                    <div class="review-box reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>100% Legit</h3>
-                        <p class="testimonial">"Fast communication and got the job done. Don't waste time with others."</p>
-                        <p class="client-name">- Client C</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="container">
-                <h2 class="reveal-on-scroll">Ready to Get Started?</h2>
-                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">Reach out for professional and rapid response.</p>
-                <a href="https://t.me/reurge" class="cta-button reveal-on-scroll" style="transition-delay: 0.2s;" target="_blank">
-                    Contact on Telegram: @reurge
-                </a>
-            </div>
-        </section>
-
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 Evexyn. All rights reserved.</p>
-            </div>
-        </footer>
-
-    </div> 
-    
-    <div id="tos-container">
-        <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank" id="tos-parchi">
-            Terms Of Service
-        </a>
-        <button id="tos-shield-btn">🛡️</button>
-    </div>
-
-
-    <script>
-        
-        // --- PRELOADER & FADE-IN SCRIPT ---
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            const mainContent = document.getElementById('main-content');
-            
-            // LOADING TIME 3500ms se 1750ms kar diya (Aadha)
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                mainContent.style.transition = 'opacity 0.5s ease-in 0.3s';
-                mainContent.style.opacity = '1';
-                setTimeout(() => { preloader.style.display = 'none'; }, 500); 
-            }, 1750); // 1.75 seconds
-        });
-
-        // --- HEADER SCROLL EFFECT SCRIPT ---
-        const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // --- SCROLL-TO-REVEAL SCRIPT ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-            const observerCallback = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            };
-            const observer = new IntersectionObserver(observerCallback, observerOptions);
-            const revealElements = document.querySelectorAll('.reveal-on-scroll');
-            revealElements.forEach(el => { observer.observe(el); });
-        });
-
-        // --- TOS PARCHI SCRIPT ---
-        const tosShieldBtn = document.getElementById('tos-shield-btn');
-        const tosParchi = document.getElementById('tos-parchi');
-        tosShieldBtn.addEventListener('click', () => {
-            tosParchi.classList.toggle('visible');
-        });
-
-        // --- SMOOTH SCROLL SCRIPT ---
-        document.querySelectorAll('header nav a, .hero-button[href^="#"], a#logo[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    let headerOffset = 80;
-                    if (targetId === '#hero') {
-                        headerOffset = 0;
-                    }
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-
-</body>
-    </html>
-    
+              
