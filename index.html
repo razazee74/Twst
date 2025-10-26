@@ -741,6 +741,72 @@
             margin-top: 60px;
             font-size: 0.9rem;
         }
+        
+        /* === 8. NAYA CONTACT FORM STYLES === */
+        .contact-form-container {
+            margin-top: 60px; /* Upar ke content se space */
+            max-width: 700px; /* Form ki chaudai */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left; 
+        }
+        
+        .contact-form-container h3 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center; /* "Send a Message" title center mein */
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Har field ke beech gap */
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a1a1a; /* Field ka dark background */
+            border: 1px solid #333; /* Halka border */
+            border-radius: 8px;
+            color: #ffffff; /* Likhte waqt text ka rang white */
+            font-size: 1rem;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box; /* Padding ko width mein include karne ke liye */
+        }
+        
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #888; /* Placeholder text (Name, Email) ka rang */
+        }
+
+        .form-textarea {
+            height: 150px; /* Message box ki height */
+            resize: vertical; 
+        }
+
+        .form-submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            /* === AAPKE REQUEST KE MUTAABIK DARK YELLOW BACKGROUND === */
+            background: var(--get-started-bg); /* #b38b00 */
+            color: var(--get-started-text); /* Black text */
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+        }
+
+        .form-submit-button:hover {
+             background: var(--get-started-hover-bg); /* #806200 */
+        }
+        /* === CONTACT FORM STYLES END === */
 
 
         /* ----- TOS BUTTON & PARCHI ----- */
@@ -892,6 +958,11 @@
             .service-box .get-started-button {
                 padding: 10px;
                 font-size: 1.1rem;
+            }
+            
+            /* === NAYE CONTACT FORM KE LIYE RESPONSIVE === */
+            .contact-form-container {
+                 margin-top: 40px;
             }
         }
     </style>
@@ -1279,10 +1350,30 @@
                     </div>
                 </div>
 
+                <div class="contact-form-container reveal-on-scroll">
+                    <h3 style="font-family: Arial, sans-serif;">Send a Message</h3>
+                    <form onsubmit="event.preventDefault(); return false;">
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-input" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-textarea" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="form-submit-button">Send Message</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="footer-copyright reveal-on-scroll">
                     <p>
-                        Website developed by Pushkar | Contact on Telegram: 
-                        <a href="https://t.me/reurge" target="_blank" rel="noopener noreferrer" style="color: #00aaff; text-decoration: none;">t.me/reurge</a>
+                        Website developed by RJ (
+                        <a href="https://t.me/reurge" target="_blank" rel="noopener noreferrer" style="color: #00aaff; text-decoration: none;">@reurge</a>)
                     </p>
                 </div>
                 </div>
