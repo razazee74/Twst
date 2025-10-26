@@ -15,7 +15,129 @@
             line-height: 1.6;
         }
 
-        /* Container */
+        /* ----- 1. PRELOADER (STAR) STYLES ----- */
+        
+        /* Preloader container jo poori screen ko cover karega */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0f0f0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Chamakta hua star */
+        .star {
+            font-size: 5rem;
+            color: #FFD700; /* Gold color */
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+            /* Animation: naam, duration, type, state */
+            animation: spinAndMoveUp 1.5s ease-out forwards;
+        }
+
+        /* Animation logic */
+        @keyframes spinAndMoveUp {
+            0% {
+                transform: rotate(0deg) translateY(0) scale(1);
+                opacity: 1;
+            }
+            70% {
+                transform: rotate(360deg) translateY(0) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(720deg) translateY(-200px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Website content (shuru mein chhupa hua) */
+        #main-content {
+            opacity: 0;
+            /* Animation: fade-in, 1s duration, 1.2s delay */
+            animation: fadeInContent 1s ease-in 1.2s forwards;
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ----- 2. TOS BUTTON & PANEL STYLES ----- */
+
+        /* TOS Button (Bottom Right) */
+        #tos-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+        
+        #tos-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* TOS Panel (Left side, hidden) */
+        #tos-panel {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Shuru mein screen ke bahar */
+            width: 220px; /* "Patla" panel */
+            height: 100%;
+            background-color: #1a1a1a;
+            border-right: 2px solid #007bff;
+            z-index: 1001;
+            padding-top: 50px;
+            transition: left 0.4s ease;
+        }
+
+        /* Panel jab khula ho */
+        #tos-panel.open {
+            left: 0;
+        }
+
+        /* Panel ke andar ka link */
+        #tos-panel a {
+            display: block;
+            padding: 15px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        #tos-panel a:hover {
+            background-color: #333;
+        }
+
+        /* Panel ko band karne ka button */
+        #tos-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            background: none;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* ----- PURANA WEBSITE CODE (Header, Hero, etc.) ----- */
         .container {
             width: 90%;
             max-width: 1100px;
@@ -24,7 +146,6 @@
             padding: 0 20px;
         }
 
-        /* Header / Navigation */
         header {
             background: #1a1a1a;
             border-bottom: 1px solid #333;
@@ -61,15 +182,14 @@
         }
 
         header nav a:hover {
-            color: #00aaff; /* Highlight color */
+            color: #00aaff;
         }
 
-        /* Hero Section (Top Area) */
         #hero {
-            padding-top: 150px; /* Space for fixed header */
+            padding-top: 150px; 
             padding-bottom: 100px;
             text-align: center;
-            background: #111; /* Slightly different dark */
+            background: #111; 
         }
 
         #hero h1 {
@@ -86,7 +206,7 @@
 
         .cta-button {
             display: inline-block;
-            background: #007bff; /* Primary button color */
+            background: #007bff; 
             color: #fff;
             padding: 12px 25px;
             font-size: 18px;
@@ -100,7 +220,6 @@
             background: #0056b3;
         }
 
-        /* Services Section */
         #services {
             padding: 80px 0;
             background: #1a1a1a;
@@ -116,7 +235,7 @@
             display: flex;
             justify-content: center;
             gap: 30px;
-            flex-wrap: wrap; /* For mobile */
+            flex-wrap: wrap; 
         }
 
         .service-box {
@@ -143,7 +262,6 @@
             color: #ccc;
         }
 
-        /* Contact Section */
         #contact {
             padding: 80px 0;
             text-align: center;
@@ -160,7 +278,6 @@
             margin-bottom: 30px;
         }
 
-        /* Footer */
         footer {
             background: #1a1a1a;
             color: #777;
@@ -172,68 +289,113 @@
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <a href="#hero" id="logo">MySite</a>
-            <nav>
-                <a href="#hero">Home</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
+    <div id="preloader">
+        <div class="star">&#9733;</div> </div>
 
-    <section id="hero">
-        <div class="container">
-            <h1>PROFESSIONAL ACCOUNT SERVICES</h1>
-            <p>Your expert solution for account management and security.</p>
-            <a href="#contact" class="cta-button">Contact Now</a>
-        </div>
-    </section>
+    <div id="main-content">
 
-    <section id="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-container">
-                
-                <div class="service-box">
-                    <h3>Service One</h3>
-                    <p>Description of the first service. Explain what you offer and why it's valuable.</p>
-                </div>
-                
-                <div class="service-box">
-                    <h3>Service Two</h3>
-                    <p>Description of the second service. Keep it clear and concise for your visitors.</p>
-                </div>
-                
-                <div class="service-box">
-                    <h3>Service Three</h3>
-                    <p>Description of the third service. This layout is perfect for three main features.</p>
-                </div>
-
+        <header>
+            <div class="container">
+                <a href="#hero" id="logo">MySite</a>
+                <nav>
+                    <a href="#hero">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </nav>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <section id="contact">
-        <div class="container">
-            <h2>Ready to Get Started?</h2>
-            <p>Reach out for professional and rapid response.</p>
-            
-            <a href="https://t.me/reurge" class="cta-button" target="_blank">
-                Contact on Telegram: @reurge
-            </a>
-        </div>
-    </section>
+        <section id="hero">
+            <div class="container">
+                <h1>PROFESSIONAL ACCOUNT SERVICES</h1>
+                <p>Your expert solution for account management and security.</p>
+                <a href="#contact" class="cta-button">Contact Now</a>
+            </div>
+        </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 MySite. All rights reserved.</p>
-        </div>
-    </footer>
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-container">
+                    
+                    <div class="service-box">
+                        <h3>Service One</h3>
+                        <p>Description of the first service. Explain what you offer and why it's valuable.</p>
+                    </div>
+                    
+                    <div class="service-box">
+                        <h3>Service Two</h3>
+                        <p>Description of the second service. Keep it clear and concise for your visitors.</p>
+                    </div>
+                    
+                    <div class="service-box">
+                        <h3>Service Three</h3>
+                        <p>Description of the third service. This layout is perfect for three main features.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Ready to Get Started?</h2>
+                <p>Reach out for professional and rapid response.</p>
+                
+                <a href="https://t.me/reurge" class="cta-button" target="_blank">
+                    Contact on Telegram: @reurge
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 MySite. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div> <button id="tos-button">TOS</button>
+
+    <div id="tos-panel">
+        <button id="tos-close">&times;</button> <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank">
+            Terms Of Service
+        </a>
+    </div>
+
 
     <script>
-        // Smooth scrolling for navigation links
+        // ----- 1. PRELOADER SCRIPT -----
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            
+            // Animation 1.5s ka hai, uske baad preloader ko gayab kar do
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                // Opacity 0 hone ke baad use DOM se hata do (taaki click na le)
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500); // 0.5s transition time
+            }, 1500); // 1.5s animation time
+        });
+
+
+        // ----- 2. TOS PANEL SCRIPT -----
+        const tosButton = document.getElementById('tos-button');
+        const tosPanel = document.getElementById('tos-panel');
+        const tosClose = document.getElementById('tos-close');
+
+        // TOS Button dabane par panel ko 'open' class do
+        tosButton.addEventListener('click', () => {
+            tosPanel.classList.add('open');
+        });
+
+        // Close (X) button dabane par 'open' class hata do
+        tosClose.addEventListener('click', () => {
+            tosPanel.classList.remove('open');
+        });
+
+
+        // ----- 3. SMOOTH SCROLL SCRIPT (Pehle se tha) -----
         document.querySelectorAll('header nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -242,7 +404,6 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // Adjust for fixed header height
                     const headerOffset = 80; 
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
