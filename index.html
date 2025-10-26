@@ -21,26 +21,53 @@
             overflow-x: hidden;
         }
 
-        /* ----- 1. PRELOADER (Pehle jaisa) ----- */
+        /* ----- 1. PRELOADER (NEW ANIMATION) ----- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #0f0f0f; display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            /* Background ko fade out karne ke liye */
+            transition: background-color 0.5s ease-out 0.3s;
         }
+        
+        /* Preloader content (star, text, dots) */
         .preloader-content {
-            opacity: 0; animation: fadeIn 1s ease-out 0.3s forwards;
-            display: flex; flex-direction: column; align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Naya 5-Point Star SVG */
+        .preloader-star {
+            width: 80px;
+            height: 80px;
+            /* Star ko fly karne ke liye transition */
+            transition: transform 1s cubic-bezier(0.5, 0, 0.75, 0), opacity 0.5s ease;
+        }
         .preloader-star svg {
-            width: 80px; height: 80px; fill: #ffffff;
-            animation: pulse 1.5s infinite ease-in-out;
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+            /* Shuru mein star ko ghumane ke liye */
+            animation: spin 1.5s linear infinite;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        
+        /* Star ko ghumane ki keyframes */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Star ko fly karne ke liye class (JS se add hogi) */
+        .preloader-star.fly-to-header {
+            /* JS se --tx aur --ty ki value set hogi */
+            transform: translate(var(--tx, -45vw), var(--ty, -48vh)) scale(0.35) rotate(720deg); 
+            animation: none; /* Infinite spin rok do */
+        }
+        
+        /* Preloader ka text aur dots */
+        .preloader-text, .loading-dots {
+            transition: opacity 0.3s ease; /* Inhe fade out karne ke liye */
         }
         .preloader-text h1 {
             font-size: 2.5rem; color: #fff; margin-top: 20px; margin-bottom: 5px;
@@ -61,9 +88,21 @@
         @keyframes dot-bounce {
             0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); }
         }
-        #main-content { opacity: 0; transition: opacity 0.5s ease-in; }
 
-        /* ----- 2. HEADER STYLES (Logo aur Links Updated) ----- */
+        /* Preloader ko gayab karne ke liye classes */
+        #preloader.fading-out {
+            background-color: transparent;
+        }
+        #preloader.fading-out .preloader-text,
+        #preloader.fading-out .loading-dots {
+            opacity: 0;
+        }
+
+        /* Website content (shuru mein chhupa hua) */
+        #main-content { opacity: 0; }
+
+
+        /* ----- 2. HEADER STYLES (Logo shuru mein chhupa rahega) ----- */
         header {
             background: transparent;
             border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -80,16 +119,14 @@
             overflow: hidden; padding: 0 20px;
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        /* Logo (STAR) */
         header #logo {
-            font-size: 28px; /* Star ka size */
-            font-weight: bold;
-            color: #fff;
-            text-decoration: none;
-            line-height: 1;
+            font-size: 28px; font-weight: bold; color: #fff;
+            text-decoration: none; line-height: 1;
+            /* Star ke aane tak chhupa rahega */
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        /* Nav Links */
-        header nav { display: flex; gap: 25px; } /* Thoda zyada gap */
+        header nav { display: flex; gap: 25px; }
         header nav a {
             color: #ccc; text-decoration: none;
             font-size: 16px; transition: color 0.3s;
@@ -97,14 +134,10 @@
         header nav a:hover { color: var(--purple-glow); }
 
 
-        /* ----- 3. NEW HERO SECTION (Background Animation ke saath) ----- */
+        /* ----- 3. HERO SECTION (Background Animation ke saath) ----- */
         #hero {
-            padding-top: 150px;
-            padding-bottom: 100px;
-            text-align: center;
-            background-color: #000;
-            position: relative;
-            overflow: hidden;
+            padding-top: 150px; padding-bottom: 100px; text-align: center;
+            background-color: #000; position: relative; overflow: hidden;
         }
         #hero::before {
             content: ''; position: absolute; top: 50%; left: 50%;
@@ -112,46 +145,30 @@
             background: radial-gradient(circle, var(--purple-glow) 0%, transparent 60%);
             filter: blur(80px); opacity: 0.6; z-index: 1;
         }
-        
-        /* NEW: Instagram Style Background Animation */
         .background-svg-animation {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            opacity: 0.15; /* Halka light */
-            width: 300px;
-            height: 300px;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); z-index: 0;
+            opacity: 0.15; width: 300px; height: 300px;
         }
         .draw-path {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 4;
-            /* Animation properties */
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
+            fill: none; stroke: #ffffff; stroke-width: 4;
+            stroke-dasharray: 1000; stroke-dashoffset: 1000;
             animation: draw 4s linear infinite;
         }
         .draw-path-dot {
-            fill: #ffffff;
-            opacity: 0;
+            fill: #ffffff; opacity: 0;
             animation: fadeInOut 4s linear infinite;
         }
-        /* Animation: Drawing */
         @keyframes draw {
             0% { stroke-dashoffset: 1000; }
             80% { stroke-dashoffset: 0; }
             100% { stroke-dashoffset: 0; }
         }
-        /* Animation: Dot Fade */
         @keyframes fadeInOut {
             0%, 50% { opacity: 0; }
             70% { opacity: 1; }
             100% { opacity: 0; }
         }
-        /* --- End Background Animation --- */
-
         .hero-content { position: relative; z-index: 2; }
         .hero-star svg {
             width: 80px; height: 80px;
@@ -194,11 +211,9 @@
         /* ----- 5. SERVICES, REVIEWS, CONTACT ----- */
         #services, #reviews, #contact { padding: 80px 0; text-align: center; }
         #services, #reviews { background: #1a1a1a; }
-        
         #services h2, #reviews h2, #contact h2 {
             font-size: 2.5rem; margin-bottom: 50px;
         }
-        
         .services-container, .reviews-container {
             display: flex; justify-content: center;
             gap: 30px; flex-wrap: wrap;
@@ -214,15 +229,12 @@
             font-size: 1.5rem; color: #00aaff;
             margin-bottom: 15px;
         }
-        /* Alag styles for review box */
         .review-box p.testimonial { font-style: italic; color: #ccc; }
         .review-box p.client-name {
             font-weight: bold; color: #fff;
             margin-top: 15px;
         }
-        
         .service-box p { color: #ccc; }
-
         #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
         .cta-button {
             display: inline-block; background: #007bff; color: #fff;
@@ -230,14 +242,13 @@
             border-radius: 5px; font-weight: bold; transition: background 0.3s;
         }
         .cta-button:hover { background: #0056b3; }
-
         footer {
             background: #1a1a1a; color: #777;
             text-align: center; padding: 20px 0;
             border-top: 1px solid #333;
         }
         
-        /* ----- 6. TOS BUTTON & PARCHI (Pehle jaisa) ----- */
+        /* ----- 6. TOS BUTTON & PARCHI ----- */
         #tos-container {
             position: fixed; bottom: 40px; right: 20px;
             z-index: 1000; display: flex; align-items: center;
@@ -271,8 +282,8 @@
     <div id="preloader">
         <div class="preloader-content">
             <div class="preloader-star">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M512 198.5l-186.7-32.3L256 0 186.7 166.2 0 198.5l133.3 145.1L99.2 512 256 422.2 412.8 512l-34.1-168.4L512 198.5z"/>
                 </svg>
             </div>
             <div class="preloader-text">
@@ -291,8 +302,7 @@
 
         <header>
             <div class="container">
-                <a href="#hero" id="logo">⭐</a>
-                <nav>
+                <a href="#hero" id="logo">⭐</a> <nav>
                     <a href="#services">Services</a>
                     <a href="#reviews">Reviews</a>
                     <a href="#contact">Contact</a>
@@ -301,7 +311,6 @@
         </header>
 
         <section id="hero">
-            
             <div class="background-svg-animation">
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <path class="draw-path" d="M30 10 H70 C81 10 90 19 90 30 V70 C90 81 81 90 70 90 H30 C19 90 10 81 10 70 V30 C10 19 19 10 30 10 Z" />
@@ -309,7 +318,6 @@
                     <circle class="draw-path-dot" cx="70" cy="30" r="4" />
                 </svg>
             </div>
-
             <div class="hero-content">
                 <div class="hero-star">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -399,14 +407,53 @@
         // --- PRELOADER & FADE-IN SCRIPT ---
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
+            const preloaderStar = document.querySelector('.preloader-star');
             const mainContent = document.getElementById('main-content');
+            const headerLogo = document.getElementById('logo');
+
+            // 1. Header ke logo ko shuru mein chupa do
+            headerLogo.style.opacity = '0';
+
+            // 2. Calculate karo ki star ko kahan fly karna hai
+            // Page load hone ke baad hi positions ka pata chalega
+            const logoRect = headerLogo.getBoundingClientRect();
+            const starRect = preloaderStar.getBoundingClientRect();
+
+            // Calculate translation distance
+            const tx = logoRect.left - starRect.left + (logoRect.width - starRect.width) / 2;
+            const ty = logoRect.top - starRect.top + (logoRect.height - starRect.height) / 2;
+            
+            // CSS variable set karo animation ke liye
+            preloaderStar.style.setProperty('--tx', `${tx}px`);
+            preloaderStar.style.setProperty('--ty', `${ty}px`);
+
+            // 3. Animation shuru karo (kam time mein)
             setTimeout(() => {
-                preloader.style.opacity = '0';
-                mainContent.style.transition = 'opacity 0.5s ease-in 0.3s';
-                mainContent.style.opacity = '1';
-                setTimeout(() => { preloader.style.display = 'none'; }, 500); 
-            }, 3500); // 3.5 seconds
+                
+                // Star ko fly karne wali class add karo
+                preloaderStar.classList.add('fly-to-header');
+                
+                // Text/dots ko gayab karne wali class add karo
+                preloader.classList.add('fading-out');
+
+                // 4. Jab star ki 1 second ki animation khatam ho:
+                setTimeout(() => {
+                    // Asli header wale star ko dikhao
+                    headerLogo.style.opacity = '1';
+                    
+                    // Preloader ko poori tarah hata do
+                    preloader.style.display = 'none';
+
+                    // Main content (website) ko dikhao
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transition = 'opacity 0.5s ease-in';
+
+                }, 1000); // Yeh 1s star ki flight time se match karta hai
+
+            }, 1500); // 1.5 second tak star ghumega
+            // Total load time = 1500ms + 1000ms = 2.5 seconds
         });
+
 
         // --- HEADER SCROLL EFFECT SCRIPT ---
         const header = document.querySelector('header');
@@ -438,33 +485,4 @@
         const tosShieldBtn = document.getElementById('tos-shield-btn');
         const tosParchi = document.getElementById('tos-parchi');
         tosShieldBtn.addEventListener('click', () => {
-            tosParchi.classList.toggle('visible');
-        });
-
-        // --- SMOOTH SCROLL SCRIPT ---
-        document.querySelectorAll('header nav a, .hero-button[href^="#"], a#logo[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    let headerOffset = 80;
-                    // Agar hero par ja rahe hain (star logo se), toh offset kam rakho
-                    if (targetId === '#hero') {
-                        headerOffset = 0;
-                    }
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
+    
