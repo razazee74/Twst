@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf - Professional Services</title>
+    <title>Evexyn - Social Media Services</title>
     
     <style>
         /* Basic Setup */
         :root {
-            --purple-glow: #5a0a9c;
+            /* PURPLE se BLUE mein change kar diya */
+            --brand-glow: #007BFF; 
             --yellow-sparkle: #ffd700;
         }
         
@@ -21,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- 1. PRELOADER (Aapke code ke mutabik) ----- */
+        /* ----- 1. PRELOADER ----- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #0f0f0f; display: flex; flex-direction: column;
@@ -52,7 +53,7 @@
         }
         .loading-dots { display: flex; margin-top: 25px; }
         .loading-dots span {
-            width: 10px; height: 10px; background-color: #8A2BE2; /* Purple */
+            width: 10px; height: 10px; background-color: var(--brand-glow); /* Color changed */
             border-radius: 50%; margin: 0 5px;
             animation: dot-bounce 1.4s infinite ease-in-out both;
         }
@@ -63,7 +64,7 @@
         }
         #main-content { opacity: 0; transition: opacity 0.5s ease-in; }
 
-        /* ----- 2. HEADER STYLES (Logo Updated) ----- */
+        /* ----- 2. HEADER STYLES ----- */
         header {
             background: transparent;
             border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -81,34 +82,31 @@
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
         
-        /* UPDATED LOGO CSS */
         header #logo {
-            display: block; /* SVG ko space dene ke liye */
+            display: block; 
             text-decoration: none;
             line-height: 1;
         }
         header #logo svg {
-            width: 28px;  /* Emoji ke font-size jaisa */
+            width: 28px; 
             height: 28px;
-            fill: #ffffff; /* Star ka rang */
-            display: block; /* Extra space hatane ke liye */
+            fill: #ffffff; 
+            display: block; 
             transition: fill 0.3s;
         }
         header #logo:hover svg {
-            fill: var(--purple-glow); /* Hover par rang badlega */
+            fill: var(--brand-glow); /* Color changed */
         }
-        /* --- End Logo CSS --- */
-
-        /* Nav Links */
+        
         header nav { display: flex; gap: 25px; }
         header nav a {
             color: #ccc; text-decoration: none;
             font-size: 16px; transition: color 0.3s;
         }
-        header nav a:hover { color: var(--purple-glow); }
+        header nav a:hover { color: var(--brand-glow); } /* Color changed */
 
 
-        /* ----- 3. NEW HERO SECTION (Background Animation ke saath) ----- */
+        /* ----- 3. NEW HERO SECTION (Text, Star, Icon, Color Updated) ----- */
         #hero {
             padding-top: 150px;
             padding-bottom: 100px;
@@ -117,13 +115,15 @@
             position: relative;
             overflow: hidden;
         }
+        /* Glow Color Changed */
         #hero::before {
             content: ''; position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%); width: 600px; height: 600px;
-            background: radial-gradient(circle, var(--purple-glow) 0%, transparent 60%);
+            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
             filter: blur(80px); opacity: 0.6; z-index: 1;
         }
         
+        /* Background Icon Size Changed */
         .background-svg-animation {
             position: absolute;
             top: 50%;
@@ -131,8 +131,8 @@
             transform: translate(-50%, -50%);
             z-index: 0;
             opacity: 0.15;
-            width: 300px;
-            height: 300px;
+            width: 400px; /* Bada kar diya (300px se) */
+            height: 400px;
         }
         .draw-path {
             fill: none;
@@ -159,23 +159,45 @@
         }
 
         .hero-content { position: relative; z-index: 2; }
+        
+        /* Star aur Title ko ek line mein laane ke liye */
+        .hero-title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Star aur text ke beech gap */
+        }
         .hero-star svg {
-            width: 80px; height: 80px;
-            fill: #ffffff; margin-bottom: 10px;
+            width: 60px; /* Size adjust kiya */
+            height: 60px;
+            fill: #ffffff;
+            margin-bottom: 0; /* Upar ka margin hata diya */
         }
-        #hero h1 { font-size: 4rem; margin: 0; letter-spacing: 4px; }
+        /* New Title */
+        #hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            letter-spacing: 2px; /* Thoda spacing adjust kiya */
+            font-family: "Segoe UI", Arial, sans-serif; /* Font ko text se match kiya */
+        }
+        /* New Subheading */
         #hero h2 {
-            font-size: 2rem; margin-top: 20px;
-            color: #fff; font-weight: 500;
+            font-size: 2rem;
+            margin-top: 25px;
+            color: #fff;
+            font-weight: 500;
         }
-        #hero p.sub-heading {
-            font-size: 1.2rem; color: #aaa; letter-spacing: 1px;
-            text-transform: uppercase; margin-top: 30px;
+        /* New Description */
+        #hero p.new-description {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 25px;
+            line-height: 1.7;
+            max-width: 600px; /* Text ko thoda chhota rakha */
+            margin-left: auto;
+            margin-right: auto;
         }
-        #hero p.services-list {
-            font-size: 1.1rem; color: #ccc;
-            margin-top: 15px;
-        }
+        
         .hero-buttons {
             margin-top: 40px; display: flex; flex-direction: column;
             align-items: center; gap: 15px;
@@ -230,11 +252,11 @@
 
         #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
         .cta-button {
-            display: inline-block; background: #007bff; color: #fff;
+            display: inline-block; background: var(--brand-glow); color: #fff;
             padding: 12px 25px; font-size: 18px; text-decoration: none;
             border-radius: 5px; font-weight: bold; transition: background 0.3s;
         }
-        .cta-button:hover { background: #0056b3; }
+        .cta-button:hover { background: #0056b3; } /* Thoda dark blue */
 
         footer {
             background: #1a1a1a; color: #777;
@@ -242,7 +264,7 @@
             border-top: 1px solid #333;
         }
         
-        /* ----- 6. TOS BUTTON & PARCHI (Pehle jaisa) ----- */
+        /* ----- 6. TOS BUTTON & PARCHI ----- */
         #tos-container {
             position: fixed; bottom: 40px; right: 20px;
             z-index: 1000; display: flex; align-items: center;
@@ -261,7 +283,7 @@
             visibility: visible;
         }
         #tos-shield-btn {
-            background-color: #007bff; color: white; border: none;
+            background-color: var(--brand-glow); color: white; border: none;
             border-radius: 50%; width: 50px; height: 50px;
             font-size: 24px; line-height: 50px; text-align: center;
             cursor: pointer; transition: background-color 0.3s;
@@ -318,15 +340,21 @@
                 </svg>
             </div>
             <div class="hero-content">
-                <div class="hero-star">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
-                    </svg>
+                
+                <div class="hero-title-container">
+                    <div class="hero-star">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
+                        </svg>
+                    </div>
+                    <h1>EᴠᴇxʏɪN</h1>
                 </div>
-                <h1>YUSUF</h1>
-                <h2>#1 Instagram &amp; Facebook Account Services</h2>
-                <p class="sub-heading">PROFESSIONAL ACCOUNT RECOVERY &amp; UNBAN SERVICES</p>
-                <p class="services-list">Instagram Unban • Facebook Recovery • Account Security</p>
+
+                <h2>#1 Social Media Services</h2>
+                <p class="new-description">
+                    EXPERT IN BANNING & RECOVERING ACCOUNT ACROSS INSTAGRAM, TELEGRAM, TIKTOK, AND MORE — fast, secure, and trusted solutions to get your account back safely
+                </p>
+
                 <div class="hero-buttons">
                     <a href="#services" class="hero-button">View Services</a>
                     <a href="#contact" class="hero-button">Contact Now</a>
@@ -365,7 +393,7 @@
                     </div>
                     <div class="review-box reveal-on-scroll" style="transition-delay: 0.1s;">
                         <h3>Life Saver</h3>
-                        <p class="testimonial">"I thought my business page was gone forever. Yusuf is a true professional and a life saver."</p>
+                        <p class="testimonial">"I thought my business page was gone forever. A true professional and a life saver."</p>
                         <p class="client-name">- Client B</p>
                     </div>
                     <div class="review-box reveal-on-scroll" style="transition-delay: 0.2s;">
@@ -389,7 +417,7 @@
 
         <footer>
             <div class="container">
-                <p>&copy; 2025 Yusuf. All rights reserved.</p>
+                <p>&copy; 2025 Evexyn. All rights reserved.</p>
             </div>
         </footer>
 
@@ -409,12 +437,14 @@
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             const mainContent = document.getElementById('main-content');
+            
+            // LOADING TIME 3500ms se 1750ms kar diya (Aadha)
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 mainContent.style.transition = 'opacity 0.5s ease-in 0.3s';
                 mainContent.style.opacity = '1';
                 setTimeout(() => { preloader.style.display = 'none'; }, 500); 
-            }, 3500); // 3.5 seconds
+            }, 1750); // 1.75 seconds
         });
 
         // --- HEADER SCROLL EFFECT SCRIPT ---
@@ -459,7 +489,6 @@
                 
                 if (targetElement) {
                     let headerOffset = 80;
-                    // Agar hero par ja rahe hain (star logo se), toh offset kam rakho
                     if (targetId === '#hero') {
                         headerOffset = 0;
                     }
@@ -476,4 +505,5 @@
     </script>
 
 </body>
-</html>
+    </html>
+    
