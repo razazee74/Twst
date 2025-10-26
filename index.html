@@ -445,4 +445,128 @@
                         <p class="testimonial">"I thought my business page was gone forever. A true professional and a life saver."</p>
                         <p class="client-name">- Client B</p>
                     </div>
+                    <div class="review-box reveal-on-scroll" style="transition-delay: 0.2s;">
+                        <h3>100% Legit</h3>
+                        <p class="testimonial">"Fast communication and got the job done. Don't waste time with others."</p>
+                        <p class="client-name">- Client C</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="reveal-on-scroll">Ready to Get Started?</h2>
+                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">Reach out for professional and rapid response.</p>
+                <a href="https://t.me/reurge" class="cta-button reveal-on-scroll" style="transition-delay: 0.2s;" target="_blank">
+                    Contact on Telegram: @reurge
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Evexyn. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div> 
+    
+    <div id="tos-container">
+        <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank" id="tos-parchi">
+            Terms Of Service
+        </a>
+        <button id="tos-shield-btn">🛡️</button>
+    </div>
+
+
+    <script>
+        
+        // --- PRELOADER & FADE-IN SCRIPT (1.75 seconds) ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                mainContent.style.transition = 'opacity 0.5s ease-in 0.3s';
+                mainContent.style.opacity = '1';
+                setTimeout(() => { preloader.style.display = 'none'; }, 500); 
+            }, 1750); // 1.75 seconds
+        });
+
+        // --- HEADER SCROLL EFFECT SCRIPT ---
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- SCROLL-TO-REVEAL SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            revealElements.forEach(el => { observer.observe(el); });
+        });
+
+        // --- TOS PARCHI SCRIPT ---
+        const tosShieldBtn = document.getElementById('tos-shield-btn');
+        const tosParchi = document.getElementById('tos-parchi');
+        tosShieldBtn.addEventListener('click', () => {
+            tosParchi.classList.toggle('visible');
+        });
+
+        // --- SMOOTH SCROLL SCRIPT ---
+        document.querySelectorAll('header nav a, .hero-button[href^="#"], a#logo[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    let headerOffset = 80;
+                    if (targetId === '#hero') {
+                        headerOffset = 0;
+                    }
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- NEW: ICON HEARTBEAT SCRIPT ---
+        const iconContainer = document.querySelector('.hero-icons-container');
+        iconContainer.addEventListener('click', () => {
+            // Check karo ki animation pehle se na chal raha ho
+            if (!iconContainer.classList.contains('animate-all')) {
+                iconContainer.classList.add('animate-all');
+                
+                // 500ms (animation duration) ke baad class hata do
+                setTimeout(() => {
+                    iconContainer.classList.remove('animate-all');
+                }, 500);
+            }
+        });
+
+    </script>
+
+</body>
+</html>
+
               
