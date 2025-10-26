@@ -409,57 +409,19 @@
             margin-bottom: 50px; /* Replaces h2's margin */
         }
 
-        /* NEW: Animated border box for headline */
+        /* UPDATED: Animated border box for headline */
         .headline-border-box {
             display: inline-block; /* Fit content */
             position: relative;
-            border: 2px solid #333; /* The static border */
-            padding: 10px 30px;
+            border: 2px solid var(--tos-blue); /* UPDATED: Blue border */
+            padding: 5px 25px; /* UPDATED: Thinner padding */
             border-radius: 8px;
+            /* UPDATED: Glowing light effect */
+            box-shadow: 0 0 10px var(--tos-blue), 0 0 15px var(--tos-blue);
         }
         
-        /* NEW: The animated "Diwali light" */
-        .headline-border-box::before {
-            content: '';
-            position: absolute;
-            width: 30px; /* UPDATED: Lamba light */
-            height: 6px; /* UPDATED */
-            background: var(--tos-blue);
-            border-radius: 3px; /* UPDATED */
-            /* UPDATED: Blue sparkle (faila hua) */
-            box-shadow: 0 0 15px var(--tos-blue), 0 0 25px var(--tos-blue), 0 0 35px var(--tos-blue);
-            
-            /* UPDATED: Offsets for new size */
-            top: -4px;  
-            left: -15px; 
-            
-            animation: light-run 4s linear infinite;
-        }
+        /* REMOVED: ::before and @keyframes light-run */
         
-        /* NEW: Keyframes for the light animation */
-        @keyframes light-run {
-            0% { 
-                top: -4px; 
-                left: -15px; 
-            }
-            25% { 
-                top: -4px; 
-                left: calc(100% - 15px); /* Move along top edge */
-            }
-            50% { 
-                top: calc(100% - 4px); 
-                left: calc(100% - 15px); /* Move down right edge */
-            }
-            75% { 
-                top: calc(100% - 4px); 
-                left: -15px; /* Move along bottom edge */
-            }
-            100% { 
-                top: -4px; 
-                left: -15px; /* Move up left edge */
-            }
-        }
-
         #services h2 {
             font-size: 2.5rem; 
             margin-bottom: 0; /* Margin is now on .headline-wrapper */
@@ -499,8 +461,8 @@
             border: 1px solid #333; 
             padding: 30px;
             border-radius: 8px; 
-            width: 360px; /* UPDATED: Wider */
-            min-height: 220px; /* UPDATED: Taller */
+            width: 360px; /* Width is OK */
+            min-height: 260px; /* UPDATED: Aur Lamba */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
             flex-shrink: 0; /* Prevents shrinking */
@@ -646,8 +608,8 @@
             
             /* Make service box width smaller on mobile */
             .service-box {
-                width: 320px; /* UPDATED */
-                min-height: 200px; /* UPDATED */
+                width: 320px;
+                min-height: 240px; /* UPDATED: Taller on mobile too */
             }
 
             /* Updated: About box ko kone se hataya */
@@ -884,7 +846,7 @@
     </div> 
     
     <div id="tos-container">
-        <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank" id="tos-parchi" aria-label="Terms of Service">
+        <a href="https://telegra.ph/AdGenIE-Terms-Of-Service-09-18-2" target="_blank" id="tos-parchi" aria-label="Terms of Service">
             Terms Of Service
         </a>
         <button id="tos-shield-btn" aria-label="Toggle Terms of Service">🛡️</button>
