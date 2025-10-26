@@ -806,6 +806,13 @@
         .form-submit-button:hover {
              background: var(--get-started-hover-bg); /* #806200 */
         }
+        
+        /* Button ko disabled state mein halka dikhaane ke liye */
+        .form-submit-button:disabled {
+            background: #555;
+            color: #999;
+            cursor: not-allowed;
+        }
         /* === CONTACT FORM STYLES END === */
 
 
@@ -1372,7 +1379,7 @@
                 </div>
                 <div class="footer-copyright reveal-on-scroll">
                     <p>
-                        Website developed by RJ (
+                        Website developed by hshsjsjsjajsjshs hshshshahs hshshwhwhw hshwhwh hwhwhw RJ (
                         <a href="https://t.me/reurge" target="_blank" rel="noopener noreferrer" style="color: #00aaff; text-decoration: none;">@reurge</a>)
                     </p>
                 </div>
@@ -1465,7 +1472,41 @@
             const observer = new IntersectionObserver(observerCallback, observerOptions);
             const revealElements = document.querySelectorAll('.reveal-on-scroll');
             revealElements.forEach(el => { observer.observe(el); });
-        });
+
+            
+            // === NAYA FAKE CONTACT FORM SCRIPT START ===
+            const submitButton = document.querySelector('.form-submit-button');
+            const contactForm = document.querySelector('.contact-form-container form');
+            
+            if (submitButton && contactForm) {
+                const originalButtonText = submitButton.textContent; // "Send Message"
+
+                submitButton.addEventListener('click', () => {
+                    // 1. Button ka text badlo
+                    submitButton.textContent = 'Message Sent ✅';
+                    submitButton.disabled = true; // Button ko disable karo
+
+                    // 2. Form fields ko select karo
+                    const allFields = contactForm.querySelectorAll('.form-input, .form-textarea');
+
+                    // 3. 1 second baad reset karo
+                    setTimeout(() => {
+                        // Saare fields khali karo
+                        allFields.forEach(field => {
+                            field.value = '';
+                        });
+
+                        // Button ko wapas pehle jaisa karo
+                        submitButton.textContent = originalButtonText;
+                        submitButton.disabled = false; // Button ko firse enable karo
+
+                    }, 1000); // 1000ms = 1 second
+                });
+            }
+            // === NAYA FAKE CONTACT FORM SCRIPT END ===
+
+        }); // <-- DOMContentLoaded yahaan khatam hota hai
+
 
         // --- TOS PARCHI SCRIPT ---
         const tosShieldBtn = document.getElementById('tos-shield-btn');
