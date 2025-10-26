@@ -391,26 +391,96 @@
             margin: 0 15px;
         }
 
-        /* Original Services, Reviews, Contact (shifted after About) */
-        #services, #reviews, #contact { padding: 80px 0; text-align: center; }
-        #services, #reviews { background: #1a1a1a; }
+        /* ----- 6. NEW SERVICES SLIDER STYLES ----- */
+        #services { 
+            padding: 80px 0; 
+            text-align: center; 
+            background: #1a1a1a;
+        }
         
-        #services h2, #reviews h2, #contact h2 {
+        #services h2 {
+            font-size: 2.5rem; 
+            margin-bottom: 50px;
+        }
+        
+        /* New slider container */
+        .slider-container {
+            width: auto;
+            overflow: hidden;
+            /* This provides the "half cm" gap from screen edges */
+            margin: 0 15px; 
+            cursor: grab;
+        }
+        .slider-container:active {
+            cursor: grabbing;
+        }
+
+        /* The long strip of boxes that moves */
+        .services-slider {
+            display: flex;
+            gap: 20px; /* Space between boxes */
+            
+            /* Manual Swipe setup */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth on iOS */
+            scrollbar-width: none; /* Hide scrollbar (Firefox) */
+            
+            /* Disable snapping for smooth auto-scroll */
+            scroll-behavior: smooth; 
+        }
+        .services-slider::-webkit-scrollbar {
+            display: none; /* Hide scrollbar (Chrome/Safari) */
+        }
+
+        .service-box {
+            background: #222; 
+            border: 1px solid #333; 
+            padding: 30px;
+            border-radius: 8px; 
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            flex-shrink: 0; /* Prevents shrinking */
+            
+            /* Make them visible by default, remove scroll reveal */
+            opacity: 1; 
+            transform: translateY(0);
+        }
+        .service-box:hover { 
+            transform: translateY(-10px); 
+        }
+        .service-box h3 {
+            font-size: 1.5rem; 
+            color: #00aaff;
+            margin-top: 0; /* Added for consistency */
+            margin-bottom: 15px;
+        }
+        .service-box p { 
+            color: #ccc; 
+            margin-bottom: 0; /* Added for consistency */
+        }
+        /* ----- End Services Slider ----- */
+
+
+        #reviews, #contact { padding: 80px 0; text-align: center; }
+        #reviews { background: #1a1a1a; }
+        
+        #reviews h2, #contact h2 {
             font-size: 2.5rem; margin-bottom: 50px;
         }
         
-        .services-container, .reviews-container {
+        .reviews-container {
             display: flex; justify-content: center;
             gap: 30px; flex-wrap: wrap;
         }
-        .service-box, .review-box {
+        .review-box {
             background: #222; border: 1px solid #333; padding: 30px;
             border-radius: 8px; width: 300px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
         }
-        .service-box:hover, .review-box:hover { transform: translateY(-10px); }
-        .service-box h3, .review-box h3 {
+        .review-box:hover { transform: translateY(-10px); }
+        .review-box h3 {
             font-size: 1.5rem; color: #00aaff;
             margin-bottom: 15px;
         }
@@ -419,8 +489,6 @@
             font-weight: bold; color: #fff;
             margin-top: 15px;
         }
-        
-        .service-box p { color: #ccc; }
 
         #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
         .cta-button {
@@ -486,6 +554,11 @@
             }
             .service-box, .review-box { width: 90%; }
             
+            /* Make service box width smaller on mobile */
+            .service-box {
+                width: 280px;
+            }
+
             /* Updated: About box ko kone se hataya */
             #about .container { padding: 20px; width: 85%; } 
             
@@ -586,13 +659,12 @@
         <section id="about">
             <div class="container">
                 <h2 class="reveal-on-scroll" style="font-family: Arial, sans-serif;">About EᴠᴇxʏɪN</h2>
-                <h3 class="reveal-on-scroll" style="font-family: Arial, sans-serif;">The Premier Account Recovery Specialist</h3>
+                
+                <h3 class="reveal-on-scroll" style="font-family: Arial, sans-serif;">The Social Media Expert</h3>
+                
                 <p class="reveal-on-scroll">
-                    Evexyn is the industry leader in social media account 
-                    services, specializing in Instagram and Facebook platforms. 
-                    Our proprietary methods combine cutting-edge technical expertise 
-                    with deep platform-specific knowledge, delivering unmatched 
-                    results for our premium clientele.
+                    I've been at the forefront of social media solutions, running a trusted agency dedicated to helping creators, agencies, and businesses recover, grow, and safeguard their digital presence across major platforms.
+                    My expertise spans Instagram, Facebook, X (formerly Twitter), and WhatsApp - all backed by proven insider methods and countless client vouches.
                 </p>
                 
                 <div class="about-stats reveal-on-scroll">
@@ -627,22 +699,55 @@
         <section id="services">
             <div class="container">
                 <h2 class="reveal-on-scroll">Our Services</h2>
-                <div class="services-container">
-                    <div class="service-box reveal-on-scroll">
-                        <h3>Service One</h3>
-                        <p>Description of the first service. Explain what you offer and why it's valuable.</p>
-                    </div>
-                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.1s;">
-                        <h3>Service Two</h3>
-                        <p>Description of the second service. Keep it clear and concise for your visitors.</p>
-                    </div>
-                    <div class="service-box reveal-on-scroll" style="transition-delay: 0.2s;">
-                        <h3>Service Three</h3>
-                        <p>Description of the third service. This layout is perfect for three main features.</p>
+                
+                <div class="slider-container">
+                    <div class="services-slider">
+                        <div class="service-box">
+                            <h3>Account Recovery</h3>
+                            <p>Got your Instagram, Facebook, or TikTok account banned or hacked? We get it back fast.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Account Banning</h3>
+                            <p>Need to remove a problematic account (impersonator, scammer, etc.)? We handle it swiftly.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Verification</h3>
+                            <p>Get the blue checkmark. We assist with the verification process for eligible profiles.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Security & Safety</h3>
+                            <p>Secure your digital assets. We safeguard your accounts from future hacks and bans.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Username Claims</h3>
+                            <p>Want an inactive username? We have methods to claim desired usernames on most platforms.</p>
+                        </div>
+                        
+                        <div class="service-box">
+                            <h3>Account Recovery</h3>
+                            <p>Got your Instagram, Facebook, or TikTok account banned or hacked? We get it back fast.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Account Banning</h3>
+                            <p>Need to remove a problematic account (impersonator, scammer, etc.)? We handle it swiftly.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Verification</h3>
+                            <p>Get the blue checkmark. We assist with the verification process for eligible profiles.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Security & Safety</h3>
+                            <p>Secure your digital assets. We safeguard your accounts from future hacks and bans.</p>
+                        </div>
+                        <div class="service-box">
+                            <h3>Username Claims</h3>
+                            <p>Want an inactive username? We have methods to claim desired usernames on most platforms.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <section id="reviews">
             <div class="container">
@@ -739,7 +844,6 @@
                 }, 1000); // Yeh 1s star ki flight time se match karta hai
 
             }, 1200); // 1.2 second tak spin karega
-            // Total load time = 1.2s spin + 1s flight = 2.2 seconds
         });
 
 
@@ -803,10 +907,47 @@
             });
         });
 
-        // --- Updated: Magic Tap Effect Script (REMOVED) ---
-        
+        // --- NEW: AUTO-SCROLLING SLIDER SCRIPT ---
+        const slider = document.querySelector('.services-slider');
+        if (slider) {
+            let autoScrollTimer;
+            const scrollSpeed = 1; // Pixels to scroll per frame
+            const scrollInterval = 25; // Milliseconds between frames (approx 40fps)
+
+            // Calculate the halfway point
+            const maxScroll = slider.scrollWidth / 2;
+
+            function startAutoScroll() {
+                // Clear any existing timer
+                clearInterval(autoScrollTimer);
+                
+                autoScrollTimer = setInterval(() => {
+                    slider.scrollLeft += scrollSpeed;
+                    
+                    // If scrolled to the end of the first set, jump back to the start
+                    if (slider.scrollLeft >= maxScroll) {
+                        // Use 'auto' behavior for an instant jump
+                        slider.scrollTo({ left: 0, behavior: 'auto' });
+                    }
+                }, scrollInterval);
+            }
+
+            function stopAutoScroll() {
+                clearInterval(autoScrollTimer);
+            }
+
+            // Pause on hover/touch
+            slider.addEventListener('mouseenter', stopAutoScroll);
+            slider.addEventListener('mouseleave', startAutoScroll);
+            slider.addEventListener('touchstart', stopAutoScroll, { passive: true });
+            slider.addEventListener('touchend', startAutoScroll);
+
+            // Start the scrolling
+            startAutoScroll();
+        }
 
     </script>
 
 </body>
 </html>
+    
