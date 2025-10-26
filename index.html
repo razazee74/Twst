@@ -284,8 +284,6 @@
             padding: 80px 0;
             text-align: center;
             color: var(--about-text-color);
-            /* position: relative; */ /* Context set on .container */
-            /* overflow: hidden; */   /* Context set on .container */
         }
         /* Updated: Added border and shadow to container */
         #about .container {
@@ -330,6 +328,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+        /* FIXED: CSS for 2x2 grid */
         .about-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -510,7 +509,9 @@
             
             #about h2 { font-size: 2rem; }
             #about h3 { font-size: 1.4rem; }
-            .about-button-zentex { width: 90%; display: flex; } /* On mobile, let it be wide */
+            
+            /* FIXED: Removed width rule so button shrinks to fit */
+            /* .about-button-zentex { width: 90%; display: flex; } */
         }
     </style>
 </head>
@@ -549,7 +550,6 @@
                     </svg>
                 </a>
                 <nav>
-                    <a href="#about">About</a>
                     <a href="#services">Services</a>
                     <a href="#reviews">Reviews</a>
                     <a href="#contact">Contact</a>
@@ -612,14 +612,15 @@
                     with deep platform-specific knowledge, delivering unmatched 
                     results for our premium clientele.
                 </p>
-                <div classm="about-stats reveal-on-scroll">
+                
+                <div class="about-stats reveal-on-scroll">
                     <div class="about-stat-item">
                         <div class="number">2+</div>
                         <div class="label">Years Experience</div>
                     </div>
                     <div class="about-stat-item">
                         <div class="number">300+</div>
-                        <div classm="label">Clients</div>
+                        <div class="label">Clients</div>
                     </div>
                     <div class="about-stat-item">
                         <div class="number">24/7</div>
@@ -630,6 +631,7 @@
                         <div class="label">Success Rate</div>
                     </div>
                 </div>
+                
                 <a href="#contact" class="about-button-zentex reveal-on-scroll">
                     <span class="dot"></span>
                     <span>EᴠᴇxʏɪN</span>
@@ -845,6 +847,5 @@
     </script>
 
 </body>
-</html>
-
-     
+    </html>
+    
