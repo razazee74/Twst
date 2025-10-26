@@ -758,7 +758,9 @@
         // --- SCROLL-TO-REVEAL SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-            const observerCallback = (entries, observer) {
+            
+            // !!!!! ----- FIXED SYNTAX ERROR HERE ----- !!!!!
+            const observerCallback = (entries, observer) => { // Added '=>'
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
