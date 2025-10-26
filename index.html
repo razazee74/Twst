@@ -425,12 +425,12 @@
             margin-bottom: 30px; 
         }
 
-        /* UPDATED: Headline box with Dark Yellow BG */
+        /* UPDATED: Headline box - PADDING KAM KIYA (Patla kiya) */
         .headline-border-box {
             display: inline-block;
             position: relative;
             background-color: var(--headline-bg); /* Dark Yellow BG */
-            padding: 2px 20px; /* Thinner padding */
+            padding: 2px 15px; /* UPDATED: Bahut kam padding - patla ho gaya */
             border-radius: 8px;
             /* Removed border and shadow */
         }
@@ -440,7 +440,6 @@
             margin-bottom: 0;
             white-space: nowrap;
             color: var(--headline-text); /* Black text */
-            line-height: 1.1;
         }
         
         /* Container for vertical boxes */
@@ -448,24 +447,28 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* Center boxes */
-            gap: 5px; /* Space between boxes */
-            padding: 0 5px; /* Side spacing */
+            gap: 25px; /* Space between boxes */
+            padding: 0 15px; /* Side spacing */
         }
 
-        /* NEW SERVICE BOX STYLING - BASED ON IMAGE 2 (Dark Yellow Theme) */
+        /* UPDATED SERVICE BOX STYLING - WIDER & MORE SQUARE/SHORTER */
         .service-box {
             background: var(--service-box-bg); 
             border: 1px solid var(--service-box-border); 
-            padding: 30px;
+            padding: 25px; /* UPDATED: Padding adjust kiya */
             border-radius: 15px; 
             width: 100%; /* Full width within container */
-            max-width: 600px; /* Max width to prevent stretching too wide */
+            max-width: 800px; /* UPDATED: Width badhaya (was 600px) */
             min-height: auto; /* Height will adapt to content */
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), 0 0 20px var(--service-box-shadow-glow); /* Adjusted glow */
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative; 
             text-align: left; 
             box-sizing: border-box; /* Include padding in width */
+            
+            /* UPDATED: More square shape ke liye */
+            display: flex;
+            flex-direction: column;
         }
         .service-box:hover { 
             transform: translateY(-5px) scale(1.01); 
@@ -500,25 +503,27 @@
         }
         .service-box p { 
             color: var(--service-text-color); 
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* UPDATED: Margin kam kiya */
             font-size: 1rem;
+            line-height: 1.5; /* UPDATED: Line height adjust */
         }
         
         .service-box .price {
             font-size: 2.2rem; 
             font-weight: bold;
             color: var(--price-color);
-            margin: 25px 0 20px; 
+            margin: 20px 0 15px; /* UPDATED: Margin adjust kiya */
         }
 
         .service-box ul {
             list-style: none;
             padding: 0;
-            margin: 0 0 30px 0;
+            margin: 0 0 20px 0; /* UPDATED: Margin kam kiya */
+            flex-grow: 1; /* UPDATED: List ko space fill karne diya */
         }
         .service-box ul li {
             color: var(--service-text-color);
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* UPDATED: Margin kam kiya */
             padding-left: 25px;
             position: relative;
             font-size: 0.95rem;
@@ -691,7 +696,7 @@
             /* Service box width on mobile */
             .service-box {
                 width: 100%; /* Use full width on mobile */
-                max-width: 90%; /* Limit max width */
+                max-width: 95%; /* Limit max width */
                 min-height: auto; /* Allow height to adjust */
             }
 
@@ -700,6 +705,13 @@
             #about h2 { font-size: 2rem; }
             #about h3 { font-size: 1.4rem; }
             
+            /* Mobile mein headline box padding aur adjust */
+            .headline-border-box {
+                padding: 2px 12px;
+            }
+            #services h2 {
+                font-size: 2rem; /* Mobile pe thoda chhota */
+            }
         }
     </style>
 </head>
