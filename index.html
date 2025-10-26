@@ -22,6 +22,21 @@
             
             /* Updated: Yellow dot to match brand */
             --zen-logo-color: var(--yellow-sparkle); 
+
+            /* NEW: Colors for the new service boxes */
+            --service-box-bg: #222; /* Darker purple from image */
+            --service-box-border: #52006A; /* Border color */
+            --service-box-shadow-glow: #8a2be2; /* Blue-violet glow */
+            --service-title-color: #f7d000; /* Yellow */
+            --service-text-color: #cccccc;
+            --price-color: #ffffff;
+            --list-dot-color: #f7d000; /* Yellow for list dots */
+            --popular-tag-bg: #8a2be2; /* Blue-violet */
+            --popular-tag-text: #ffffff;
+            --get-started-bg: #8a2be2; /* Blue-violet */
+            --get-started-hover-bg: #6a008c; /* Darker purple on hover */
+            --get-started-text: #ffffff;
+            --icon-color: #f7d000; /* Yellow for icons */
         }
         
         body {
@@ -403,36 +418,31 @@
             overflow: hidden; /* Added for glow */
         }
         
-        /* NEW: Wrapper to center the inline-block */
+        /* UPDATED: Headline wrapper for services */
         .headline-wrapper {
             text-align: center;
-            margin-bottom: 50px; /* Replaces h2's margin */
+            margin-bottom: 30px; /* Reduced space below headline */
         }
 
-        /* UPDATED: Animated border box for headline */
+        /* UPDATED: Headline border box - now with less top padding */
         .headline-border-box {
-            display: inline-block; /* Fit content */
+            display: inline-block;
             position: relative;
-            border: 2px solid var(--tos-blue); /* UPDATED: Blue border */
-            padding: 5px 25px; /* UPDATED: Thinner padding */
+            border: 2px solid var(--tos-blue);
+            padding: 5px 25px; /* Reduced vertical padding */
             border-radius: 8px;
-            /* UPDATED: Glowing light effect */
             box-shadow: 0 0 10px var(--tos-blue), 0 0 15px var(--tos-blue);
         }
         
-        /* REMOVED: ::before and @keyframes light-run */
-        
         #services h2 {
             font-size: 2.5rem; 
-            margin-bottom: 0; /* Margin is now on .headline-wrapper */
-            white-space: nowrap; /* UPDATED: Ek line mein rakho */
+            margin-bottom: 0;
+            white-space: nowrap;
         }
         
-        /* New slider container */
         .slider-container {
             width: auto;
             overflow: hidden;
-            /* This provides the "half cm" gap from screen edges */
             margin: 0 15px; 
             cursor: grab;
         }
@@ -440,50 +450,128 @@
             cursor: grabbing;
         }
 
-        /* The long strip of boxes that moves */
         .services-slider {
             display: flex;
-            gap: 20px; /* Space between boxes */
-            
-            /* Manual Swipe setup */
+            gap: 20px; 
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Smooth on iOS */
-            scrollbar-width: none; /* Hide scrollbar (Firefox) */
-            
-            /* Removed scroll-behavior: smooth to prevent JS conflict */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
         .services-slider::-webkit-scrollbar {
-            display: none; /* Hide scrollbar (Chrome/Safari) */
+            display: none;
         }
 
+        /* NEW SERVICE BOX STYLING - BASED ON IMAGE 2 */
         .service-box {
-            background: #222; 
-            border: 1px solid #333; 
+            background: var(--service-box-bg); 
+            border: 1px solid var(--service-box-border); 
             padding: 30px;
-            border-radius: 8px; 
-            width: 360px; /* Width is OK */
-            min-height: 260px; /* UPDATED: Aur Lamba */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s;
-            flex-shrink: 0; /* Prevents shrinking */
-            
-            /* Added for better vertical centering */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            border-radius: 15px; /* Rounded corners like image */
+            width: 320px; /* Adjusted width to match image proportions */
+            min-height: 480px; /* Significantly taller as requested */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), 0 0 30px var(--service-box-shadow-glow); /* Glow effect */
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0;
+            position: relative; /* For the "MOST POPULAR" tag */
+            text-align: left; /* Text alignment from image */
         }
         .service-box:hover { 
-            transform: translateY(-10px); 
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4), 0 0 40px var(--service-box-shadow-glow);
         }
-        .service-box h3 {
-            font-size: 1.5rem; 
-            color: #00aaff;
-            margin-top: 0; /* Added for consistency */
+
+        /* Icons at the top of service box */
+        .service-box .icon-group {
+            display: flex;
+            align-items: center;
             margin-bottom: 15px;
         }
+        .service-box .icon-group svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--icon-color);
+            margin-right: 10px;
+        }
+        .service-box .icon-group .lock-icon {
+            width: 20px; /* Slightly smaller lock icon */
+            height: 20px;
+            margin-left: 5px; /* Space between text and lock */
+        }
+
+
+        .service-box h3 {
+            font-size: 1.8rem; /* Larger title */
+            color: var(--service-title-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.2; /* Better line spacing for title */
+        }
         .service-box p { 
-            color: #ccc; 
-            margin-bottom: 0; /* Added for consistency */
+            color: var(--service-text-color); 
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .service-box .price {
+            font-size: 2.2rem; /* Big price text */
+            font-weight: bold;
+            color: var(--price-color);
+            margin: 25px 0 20px; /* More space around price */
+        }
+
+        .service-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+        .service-box ul li {
+            color: var(--service-text-color);
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        .service-box ul li::before {
+            content: '•'; /* Custom bullet point */
+            color: var(--list-dot-color);
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -2px;
+            line-height: 1;
+        }
+
+        .service-box .get-started-button {
+            display: block;
+            width: calc(100% - 20px); /* Adjust for padding in button */
+            margin: 0 auto;
+            padding: 15px 20px;
+            background: var(--get-started-bg);
+            color: var(--get-started-text);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .service-box .get-started-button:hover {
+            background: var(--get-started-hover-bg);
+        }
+
+        /* "MOST POPULAR" Tag */
+        .service-box .popular-tag {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--popular-tag-bg);
+            color: var(--popular-tag-text);
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-top-right-radius: 15px; /* Match box border radius */
+            border-bottom-left-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         /* ----- End Services Slider ----- */
 
@@ -606,10 +694,10 @@
             }
             .review-box { width: 90%; }
             
-            /* Make service box width smaller on mobile */
+            /* Service box width on mobile */
             .service-box {
-                width: 320px;
-                min-height: 240px; /* UPDATED: Taller on mobile too */
+                width: 280px; /* Slightly smaller for mobile */
+                min-height: 450px; 
             }
 
             /* Updated: About box ko kone se hataya */
@@ -758,45 +846,134 @@
                 <div class="slider-container">
                     <div class="services-slider">
                         <div class="service-box">
-                            <h3>Account Recovery</h3>
-                            <p>Got your Instagram, Facebook, or TikTok account banned or hacked? We get it back fast.</p>
+                            <div class="popular-tag">MOST POPULAR</div>
+                            <div class="icon-group">
+                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                                </svg>
+                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h3>Instagram Account Recovery</h3>
+                            <p>Expert service to regain access to banned or suspended Instagram accounts with a high success rate.</p>
+                            <div class="price">Starting from xxxx$</div>
+                            <ul>
+                                <li>High success rate</li>
+                                <li>24/7 support</li>
+                                <li>Professional handling</li>
+                                <li>Quick turnaround</li>
+                            </ul>
+                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
                         </div>
+
                         <div class="service-box">
-                            <h3>Account Banning</h3>
-                            <p>Need to remove a problematic account (impersonator, scammer, etc.)? We handle it swiftly.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>Verification</h3>
-                            <p>Get the blue checkmark. We assist with the verification process for eligible profiles.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>Security & Safety</h3>
-                            <p>Secure your digital assets. We safeguard your accounts from future hacks and bans.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>Username Claims</h3>
-                            <p>Want an inactive username? We have methods to claim desired usernames on most platforms.</p>
+                            <div class="icon-group">
+                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                                </svg>
+                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h3>Facebook Account Recovery</h3>
+                            <p>Recover your disabled or hacked Facebook profile and pages quickly with our specialized methods.</p>
+                            <div class="price">Starting from xxxx$</div>
+                            <ul>
+                                <li>High success rate</li>
+                                <li>24/7 support</li>
+                                <li>Professional handling</li>
+                                <li>Quick turnaround</li>
+                            </ul>
+                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
                         </div>
                         
                         <div class="service-box">
-                            <h3>Account Recovery</h3>
-                            <p>Got your Instagram, Facebook, or TikTok account banned or hacked? We get it back fast.</p>
+                            <div class="icon-group">
+                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                                </svg>
+                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h3>TikTok Account Recovery</h3>
+                            <p>Banned or suspended on TikTok? We provide solutions to get your account back and active.</p>
+                            <div class="price">Starting from xxxx$</div>
+                            <ul>
+                                <li>High success rate</li>
+                                <li>24/7 support</li>
+                                <li>Professional handling</li>
+                                <li>Quick turnaround</li>
+                            </ul>
+                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
                         </div>
+
                         <div class="service-box">
-                            <h3>Account Banning</h3>
-                            <p>Need to remove a problematic account (impersonator, scammer, etc.)? We handle it swiftly.</p>
+                            <div class="icon-group">
+                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                                </svg>
+                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h3>Telegram Account Recovery</h3>
+                            <p>Regain access to your Telegram account, groups, or channels that have been compromised or banned.</p>
+                            <div class="price">Starting from xxxx$</div>
+                            <ul>
+                                <li>High success rate</li>
+                                <li>24/7 support</li>
+                                <li>Professional handling</li>
+                                <li>Quick turnaround</li>
+                            </ul>
+                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
                         </div>
+
                         <div class="service-box">
-                            <h3>Verification</h3>
-                            <p>Get the blue checkmark. We assist with the verification process for eligible profiles.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>Security & Safety</h3>
-                            <p>Secure your digital assets. We safeguard your accounts from future hacks and bans.</p>
-                        </div>
-                        <div class="service-box">
-                            <h3>Username Claims</h3>
-                            <p>Want an inactive username? We have methods to claim desired usernames on most platforms.</p>
+                            <div class="icon-group">
+                                <svg class="cursor-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 13H11V21H13V13H21V11H13V3H11V11H3V13Z" stroke-width="0" fill="var(--icon-color)" transform="rotate(45 12 12)"/>
+                                    <path d="M14.5 4.5L19.5 9.5C20.25 10.25 20.25 11.45 19.5 12.2L12.2 19.5C11.45 20.25 10.25 20.25 9.5 19.5L4.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M9.5 4.5L14.5 9.5M4.5 9.5L9.5 14.5" stroke="var(--icon-color)" fill="none"/>
+                                    <path d="M12 2L14 4L12 6L10 4L12 2Z" fill="var(--icon-color)"/>
+                                    <path d="M18 8L20 10L18 12L16 10L18 8Z" fill="var(--icon-color)"/>
+                                </svg>
+                                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="var(--icon-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h3>Twitter (X) Account Recovery</h3>
+                            <p>Facing issues with your X (Twitter) account? We help in recovering suspended or locked profiles.</p>
+                            <div class="price">Starting from xxxx$</div>
+                            <ul>
+                                <li>High success rate</li>
+                                <li>24/7 support</li>
+                                <li>Professional handling</li>
+                                <li>Quick turnaround</li>
+                            </ul>
+                            <a href="https://t.me/evexyinups" target="_blank" class="get-started-button">Get Started</a>
                         </div>
                     </div>
                 </div>
@@ -918,8 +1095,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             
-            // !!!!! ----- FIXED SYNTAX ERROR HERE ----- !!!!!
-            const observerCallback = (entries, observer) => { // Added '=>'
+            const observerCallback = (entries, observer) => { 
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
