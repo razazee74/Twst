@@ -31,7 +31,7 @@
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative; /* For tap effect */
+            position: relative; 
         }
 
         /* ----- 1. PRELOADER (NEW Star Animation) ----- */
@@ -295,7 +295,6 @@
             margin: auto;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.05); /* Halka glow */
             
-            /* Added for Magic Glow Effect */
             position: relative;
             overflow: hidden;
         }
@@ -468,25 +467,8 @@
         }
         #tos-shield-btn:hover { background-color: #d4b100; }
 
-        /* ----- 7. Magic Tap Effect CSS ----- */
-        .tap-glow {
-            position: absolute;
-            width: 400px; /* Updated: Bada size */
-            height: 400px;
-            background: radial-gradient(circle, var(--brand-glow) 0%, transparent 60%);
-            filter: blur(80px); /* Updated: Jyada faila hua */
-            opacity: 0;
-            border-radius: 50%;
-            pointer-events: none; /* Allows clicks to pass through */
-            z-index: 0; /* Updated: Behind content */
-            transform: translate(-50%, -50%) scale(0);
-            animation: tap-fade-out 4s ease-out forwards; /* Updated: Dheere fade hoga */
-        }
-
-        @keyframes tap-fade-out {
-            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.5); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-        }
+        /* ----- 7. Magic Tap Effect CSS (REMOVED) ----- */
+        
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -776,7 +758,7 @@
         // --- SCROLL-TO-REVEAL SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-            const observerCallback = (entries, observer) => {
+            const observerCallback = (entries, observer) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
@@ -819,33 +801,12 @@
             });
         });
 
-        // --- Updated: Magic Tap Effect Script (Only in About box) ---
-        const aboutContainer = document.querySelector('#about .container'); 
+        // --- Updated: Magic Tap Effect Script (REMOVED) ---
         
-        aboutContainer.addEventListener('click', function(e) {
-            // Create a new glow element
-            const glow = document.createElement('div');
-            glow.classList.add('tap-glow');
-            
-            // Append directly to this container
-            this.appendChild(glow); 
-
-            // Position the glow at the click coordinates *relative to the container*
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            glow.style.left = `${x}px`;
-            glow.style.top = `${y}px`;
-
-            // Remove the glow after its animation is complete
-            glow.addEventListener('animationend', () => {
-                glow.remove();
-            });
-        });
 
     </script>
 
 </body>
-    </html>
-    
+</html>
+
+         
