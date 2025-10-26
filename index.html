@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yusuf - Professional Services</title>
     
     <style>
@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- 1. PRELOADER (NEW ANIMATION) ----- */
+        /* ----- 1. PRELOADER (NO SPIN) ----- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #0f0f0f; display: flex; flex-direction: column;
@@ -46,23 +46,18 @@
             width: 100%;
             height: 100%;
             fill: #ffffff;
-            animation: spin 1.5s linear infinite;
+            /* YAHAN SE SPIN ANIMATION HATA DIYA GAYA HAI */
+            /* animation: spin 1.5s linear infinite; */ 
         }
         
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         /* Star ko fly karne ke liye class */
         .preloader-star.fly-to-header {
             transform: translate(var(--tx, -45vw), var(--ty, -48vh)) scale(0.35) rotate(720deg); 
-            animation: none; /* Infinite spin rok do */
         }
         
         /* Preloader ka text aur dots */
         .preloader-text, .loading-dots {
-            transition: opacity 0.3s ease; /* Inhe fade out karne ke liye */
+            transition: opacity 0.3s ease;
         }
         .preloader-text h1 {
             font-size: 2.5rem; color: #fff; margin-top: 20px; margin-bottom: 5px;
@@ -97,7 +92,7 @@
         #main-content { opacity: 0; }
 
 
-        /* ----- 2. HEADER STYLES (Logo shuru mein chhupa rahega) ----- */
+        /* ----- 2. HEADER STYLES ----- */
         header {
             background: transparent;
             border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -128,7 +123,7 @@
         header nav a:hover { color: var(--purple-glow); }
 
 
-        /* ----- 3. HERO SECTION (Background Animation ke saath) ----- */
+        /* ----- 3. HERO SECTION ----- */
         #hero {
             padding-top: 150px; padding-bottom: 100px; text-align: center;
             background-color: #000; position: relative; overflow: hidden;
@@ -408,15 +403,21 @@
 
             headerLogo.style.opacity = '0'; // Header logo shuru mein hide
 
-            const logoRect = headerLogo.getBoundingClientRect();
-            const starRect = preloaderStar.getBoundingClientRect();
-            const tx = logoRect.left - starRect.left + (logoRect.width - starRect.width) / 2;
-            const ty = logoRect.top - starRect.top + (logoRect.height - starRect.height) / 2;
-            
-            preloaderStar.style.setProperty('--tx', `${tx}px`);
-            preloaderStar.style.setProperty('--ty', `${ty}px`);
+            // Check karo ki headerLogo mil bhi raha hai ya nahi
+            if (headerLogo) {
+                const logoRect = headerLogo.getBoundingClientRect();
+                const starRect = preloaderStar.getBoundingClientRect();
+                const tx = logoRect.left - starRect.left + (logoRect.width - starRect.width) / 2;
+                const ty = logoRect.top - starRect.top + (logoRect.height - starRect.height) / 2;
+                
+                preloaderStar.style.setProperty('--tx', `${tx}px`);
+                preloaderStar.style.setProperty('--ty', `${ty}px`);
+            } else {
+                console.error("Header logo element (#logo) nahi mila.");
+                return; // Agar logo nahi mila toh animation na chalayein
+            }
 
-            // 1. Sirf 1 second (1000ms) tak spin karega
+            // 1. Sirf 1 second (1000ms) tak static rahega
             setTimeout(() => {
                 
                 // Star ko fly karne wali class add karo (yeh 1.5s lega)
@@ -438,10 +439,10 @@
                     mainContent.style.opacity = '1';
                     mainContent.style.transition = 'opacity 0.5s ease-in';
 
-                }, 1500); // Yeh 1.5s star ki flight time se match karta hai
+                }, 1500); // Yeh 1.5s star ki flight time se match karta hai (1500ms)
 
-            }, 1000); // 1 second tak spin karega
-            // Total load time = 1s spin + 1.5s flight = 2.5 seconds
+            }, 1000); // 1 second tak static rahega
+            // Total load time = 1s static + 1.5s flight = 2.5 seconds
         });
 
 
@@ -455,14 +456,13 @@
             }
         });
 
-        // --- SCROLL-TO-REVEAL SCRIPT (BUG FIXED) ---
+        // --- SCROLL-TO-REVEAL SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observerCallback = (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // YAHAN BUG FIX KIYA GAYA HAI
                         observer.unobserve(entry.target);
                     }
                 });
@@ -484,5 +484,4 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-        
+                const targetElement = document.q
