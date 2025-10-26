@@ -13,11 +13,11 @@
             background-color: #0f0f0f; /* Dark background */
             color: #ffffff;
             line-height: 1.6;
+            overflow-x: hidden; /* Horizontal scrollbar ko rokne ke liye */
         }
 
-        /* ----- 1. PRELOADER (STAR) STYLES ----- */
+        /* ----- 1. PRELOADER (Video Jaisa) STYLES ----- */
         
-        /* Preloader container jo poori screen ko cover karega */
         #preloader {
             position: fixed;
             top: 0;
@@ -26,52 +26,122 @@
             height: 100%;
             background-color: #0f0f0f;
             display: flex;
+            flex-direction: column; /* Star, text, dots ko upar-neeche rakhega */
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease-out; /* Gayab hone ka animation */
         }
 
-        /* Chamakta hua star */
-        .star {
-            font-size: 5rem;
-            color: #FFD700; /* Gold color */
-            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
-            /* Animation: naam, duration, type, state */
-            animation: spinAndMoveUp 1.5s ease-out forwards;
+        /* Preloader ke content ko fade in karne ke liye */
+        .preloader-content {
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Animation logic */
-        @keyframes spinAndMoveUp {
-            0% {
-                transform: rotate(0deg) translateY(0) scale(1);
-                opacity: 1;
-            }
-            70% {
-                transform: rotate(360deg) translateY(0) scale(1.2);
-                opacity: 1;
-            }
-            100% {
-                transform: rotate(720deg) translateY(-200px) scale(0);
-                opacity: 0;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Star (SVG se banaya gaya, video jaisa) */
+        .preloader-star svg {
+            width: 80px;
+            height: 80px;
+            fill: #ffffff;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        /* Star ka halka sa pulse effect */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Preloader ka Text */
+        .preloader-text h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .preloader-text p {
+            font-size: 1rem;
+            color: #aaa;
+            text-align: center;
+            letter-spacing: 1.5px;
+            margin: 0;
+        }
+
+        /* Loading Dots (Video jaisa) */
+        .loading-dots {
+            display: flex;
+            margin-top: 25px;
+        }
+
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            background-color: #8A2BE2; /* Purple color */
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: dot-bounce 1.4s infinite ease-in-out both;
+        }
+
+        /* Dots ko alag-alag time par bounce karana */
+        .loading-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        .loading-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        
+        @keyframes dot-bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            } 40% {
+                transform: scale(1.0);
             }
         }
 
         /* Website content (shuru mein chhupa hua) */
         #main-content {
             opacity: 0;
-            /* Animation: fade-in, 1s duration, 1.2s delay */
-            animation: fadeInContent 1s ease-in 1.2s forwards;
+            transition: opacity 0.5s ease-in;
         }
 
-        @keyframes fadeInContent {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* ----- 2. SCROLL-TO-REVEAL STYLES ----- */
+        
+        /* Yeh class JS se add hogi, shuru mein content chupa rahega */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px); /* Neeche se upar aayega */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        /* Jab content visible ho */
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* ----- 2. TOS BUTTON & PANEL STYLES ----- */
+        /* Services ko ek-ek karke laane ke liye */
+        .service-box:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+        .service-box:nth-child(3) {
+            transition-delay: 0.2s;
+        }
 
-        /* TOS Button (Bottom Right) */
+
+        /* ----- 3. TOS BUTTON & PANEL STYLES ----- */
         #tos-button {
             position: fixed;
             bottom: 20px;
@@ -86,17 +156,13 @@
             z-index: 1000;
             transition: background-color 0.3s;
         }
-        
-        #tos-button:hover {
-            background-color: #0056b3;
-        }
+        #tos-button:hover { background-color: #0056b3; }
 
-        /* TOS Panel (Left side, hidden) */
         #tos-panel {
             position: fixed;
             top: 0;
-            left: -250px; /* Shuru mein screen ke bahar */
-            width: 220px; /* "Patla" panel */
+            left: -250px; /* Hidden */
+            width: 220px;
             height: 100%;
             background-color: #1a1a1a;
             border-right: 2px solid #007bff;
@@ -104,13 +170,7 @@
             padding-top: 50px;
             transition: left 0.4s ease;
         }
-
-        /* Panel jab khula ho */
-        #tos-panel.open {
-            left: 0;
-        }
-
-        /* Panel ke andar ka link */
+        #tos-panel.open { left: 0; }
         #tos-panel a {
             display: block;
             padding: 15px 20px;
@@ -118,12 +178,7 @@
             text-decoration: none;
             font-size: 16px;
         }
-
-        #tos-panel a:hover {
-            background-color: #333;
-        }
-
-        /* Panel ko band karne ka button */
+        #tos-panel a:hover { background-color: #333; }
         #tos-close {
             position: absolute;
             top: 10px;
@@ -137,7 +192,7 @@
         }
 
 
-        /* ----- PURANA WEBSITE CODE (Header, Hero, etc.) ----- */
+        /* ----- 4. PURANA WEBSITE CODE (Header, Hero, etc.) ----- */
         .container {
             width: 90%;
             max-width: 1100px;
@@ -155,55 +210,15 @@
             top: 0;
             z-index: 100;
         }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        header #logo { font-size: 24px; font-weight: bold; color: #fff; text-decoration: none; }
+        header nav { display: flex; gap: 20px; }
+        header nav a { color: #ccc; text-decoration: none; font-size: 16px; transition: color 0.3s; }
+        header nav a:hover { color: #00aaff; }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header #logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        header nav {
-            display: flex;
-            gap: 20px;
-        }
-
-        header nav a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        header nav a:hover {
-            color: #00aaff;
-        }
-
-        #hero {
-            padding-top: 150px; 
-            padding-bottom: 100px;
-            text-align: center;
-            background: #111; 
-        }
-
-        #hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        #hero p {
-            font-size: 1.2rem;
-            color: #aaa;
-            margin-bottom: 30px;
-        }
-
+        #hero { padding-top: 150px; padding-bottom: 100px; text-align: center; background: #111; }
+        #hero h1 { font-size: 3.5rem; margin-bottom: 20px; color: #fff; }
+        #hero p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
         .cta-button {
             display: inline-block;
             background: #007bff; 
@@ -215,29 +230,11 @@
             font-weight: bold;
             transition: background 0.3s;
         }
+        .cta-button:hover { background: #0056b3; }
 
-        .cta-button:hover {
-            background: #0056b3;
-        }
-
-        #services {
-            padding: 80px 0;
-            background: #1a1a1a;
-            text-align: center;
-        }
-
-        #services h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-        }
-
-        .services-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap; 
-        }
-
+        #services { padding: 80px 0; background: #1a1a1a; text-align: center; }
+        #services h2 { font-size: 2.5rem; margin-bottom: 50px; }
+        .services-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .service-box {
             background: #222;
             border: 1px solid #333;
@@ -247,50 +244,38 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
         }
+        .service-box:hover { transform: translateY(-10px); }
+        .service-box h3 { font-size: 1.5rem; color: #00aaff; margin-bottom: 15px; }
+        .service-box p { color: #ccc; }
 
-        .service-box:hover {
-            transform: translateY(-10px);
-        }
+        #contact { padding: 80px 0; text-align: center; }
+        #contact h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        #contact p { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
 
-        .service-box h3 {
-            font-size: 1.5rem;
-            color: #00aaff;
-            margin-bottom: 15px;
-        }
+        footer { background: #1a1a1a; color: #777; text-align: center; padding: 20px 0; border-top: 1px solid #333; }
 
-        .service-box p {
-            color: #ccc;
-        }
-
-        #contact {
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        #contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        #contact p {
-            font-size: 1.2rem;
-            color: #aaa;
-            margin-bottom: 30px;
-        }
-
-        footer {
-            background: #1a1a1a;
-            color: #777;
-            text-align: center;
-            padding: 20px 0;
-            border-top: 1px solid #333;
-        }
     </style>
 </head>
 <body>
 
     <div id="preloader">
-        <div class="star">&#9733;</div> </div>
+        <div class="preloader-content">
+            <div class="preloader-star">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 0 L61.2 38.8 L100 50 L61.2 61.2 L50 100 L38.8 61.2 L0 50 L38.8 38.8 Z"/>
+                </svg>
+            </div>
+            <div class="preloader-text">
+                <h1>MySite</h1>
+                <p>Professional Services</p>
+            </div>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
 
     <div id="main-content">
 
@@ -307,28 +292,29 @@
 
         <section id="hero">
             <div class="container">
-                <h1>PROFESSIONAL ACCOUNT SERVICES</h1>
-                <p>Your expert solution for account management and security.</p>
-                <a href="#contact" class="cta-button">Contact Now</a>
+                <h1 class="reveal-on-scroll">PROFESSIONAL ACCOUNT SERVICES</h1>
+                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">Your expert solution for account management and security.</p>
+                <a href="#contact" class="cta-button reveal-on-scroll" style="transition-delay: 0.2s;">Contact Now</a>
             </div>
         </section>
 
         <section id="services">
             <div class="container">
-                <h2>Our Services</h2>
+                <h2 class="reveal-on-scroll">Our Services</h2>
+                
                 <div class="services-container">
                     
-                    <div class="service-box">
+                    <div class="service-box reveal-on-scroll">
                         <h3>Service One</h3>
                         <p>Description of the first service. Explain what you offer and why it's valuable.</p>
                     </div>
                     
-                    <div class="service-box">
+                    <div class="service-box reveal-on-scroll">
                         <h3>Service Two</h3>
                         <p>Description of the second service. Keep it clear and concise for your visitors.</p>
                     </div>
                     
-                    <div class="service-box">
+                    <div class="service-box reveal-on-scroll">
                         <h3>Service Three</h3>
                         <p>Description of the third service. This layout is perfect for three main features.</p>
                     </div>
@@ -339,10 +325,10 @@
 
         <section id="contact">
             <div class="container">
-                <h2>Ready to Get Started?</h2>
-                <p>Reach out for professional and rapid response.</p>
+                <h2 class="reveal-on-scroll">Ready to Get Started?</h2>
+                <p class="reveal-on-scroll" style="transition-delay: 0.1s;">Reach out for professional and rapid response.</p>
                 
-                <a href="https://t.me/reurge" class="cta-button" target="_blank">
+                <a href="https://t.me/reurge" class="cta-button reveal-on-scroll" style="transition-delay: 0.2s;" target="_blank">
                     Contact on Telegram: @reurge
                 </a>
             </div>
@@ -355,51 +341,88 @@
         </footer>
 
     </div> <button id="tos-button">TOS</button>
-
     <div id="tos-panel">
-        <button id="tos-close">&times;</button> <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank">
+        <button id="tos-close">&times;</button>
+        <a href="https://telegra.ph/AdGenie-Terms-Of-Service-09-18-2" target="_blank">
             Terms Of Service
         </a>
     </div>
 
 
     <script>
-        // ----- 1. PRELOADER SCRIPT -----
+        
+        // --- PRELOADER & FADE-IN SCRIPT ---
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('main-content');
             
-            // Animation 1.5s ka hai, uske baad preloader ko gayab kar do
+            // 3.5 seconds tak preloader dikhayega
             setTimeout(() => {
+                // Preloader ko fade out karo
                 preloader.style.opacity = '0';
-                // Opacity 0 hone ke baad use DOM se hata do (taaki click na le)
+                
+                // Main content ko fade in karo (preloader ke 0.3s baad)
+                mainContent.style.transition = 'opacity 0.5s ease-in 0.3s';
+                mainContent.style.opacity = '1';
+                
+                // Preloader ko DOM se hata do
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                }, 500); // 0.5s transition time
-            }, 1500); // 1.5s animation time
+                }, 500); // 0.5s fade-out time
+            }, 3500); // 3.5 seconds
         });
 
 
-        // ----- 2. TOS PANEL SCRIPT -----
+        // --- SCROLL-TO-REVEAL SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Options for the observer
+            const observerOptions = {
+                root: null, // viewport ke relation mein
+                rootMargin: '0px',
+                threshold: 0.1 // 10% dikhne par trigger hoga
+            };
+
+            // Observer ka function
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Ek baar dikhne ke baad dobara nahi
+                    }
+                });
+            };
+
+            // Observer banana
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // Saare elements jinpar animation lagana hai
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            
+            // Har element ko observe karna
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+
+        // --- TOS PANEL SCRIPT ---
         const tosButton = document.getElementById('tos-button');
         const tosPanel = document.getElementById('tos-panel');
         const tosClose = document.getElementById('tos-close');
 
-        // TOS Button dabane par panel ko 'open' class do
         tosButton.addEventListener('click', () => {
             tosPanel.classList.add('open');
         });
 
-        // Close (X) button dabane par 'open' class hata do
         tosClose.addEventListener('click', () => {
             tosPanel.classList.remove('open');
         });
 
 
-        // ----- 3. SMOOTH SCROLL SCRIPT (Pehle se tha) -----
+        // --- SMOOTH SCROLL SCRIPT ---
         document.querySelectorAll('header nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 
